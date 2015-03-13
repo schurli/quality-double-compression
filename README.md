@@ -1,6 +1,14 @@
 # quality-double-compression
 PS Multimedia Datenformate
 
+## Sources:
+
+* JPEG2000: https://code.google.com/p/openjpeg/
+* JPEG XR: https://github.com/curasystems/jxrlib (clone of https://jxrlib.codeplex.com/)
+* JPEGv9: http://www.infai.org/jpeg/
+
+* Image Quality Assessment: http://tdistler.com/iqa/
+
 ## Dependencies:
 
 * `sudo apt-get install libbsd-dev cmake`
