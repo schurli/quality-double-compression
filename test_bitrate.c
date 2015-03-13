@@ -22,7 +22,7 @@ char path_jpegxr[] = "./lib/jxrlib-master/JxrEncApp -i %s -o %s -q %s";
  * 2nd wildcard is output file (jpg)
  * 3rd wildcard is input file (bmp)
  */
-char path_jpeg[] = "./lib/jpeg-9a/cjpeg -outfile %s %s";// -quality %s
+char path_jpeg[] = "./lib/jpeg-9a/cjpeg -quality %s -outfile %s %s";
 
 /**
  * The main procedure
@@ -64,7 +64,7 @@ main(int argc, const char* argv[])
   char quality[] = "50";
   char command[1000];
 
-  sprintf(command, path_jpeg, output_file, input_file);//quality,
+  sprintf(command, path_jpeg, quality, output_file, input_file);//
   printf("exec: %s\n", command);
   system(command);
 

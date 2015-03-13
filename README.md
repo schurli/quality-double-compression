@@ -62,3 +62,9 @@ See `./lib/jpeg-9a/usage.txt` for switches.
 
 See `./lib/openjpeg-2.1.0/bin/opj_compress -h` for further options.
 
+
+## Development
+
+Create a standard conform bmp file in the root directory called mikro.bmp. 
+Use e.g. GIMP and enable the compatibility export option in the BMP save dialog.
+Use `make bitrate` to create test images.
