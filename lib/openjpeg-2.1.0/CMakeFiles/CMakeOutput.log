@@ -1,0 +1,416 @@
+The system is: Linux - 3.2.0-4-486 - i686
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: /usr/bin/gcc 
+Build flags: 
+Id flags: 
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+
+The C compiler identification is GNU, found in "/home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CompilerIdC/a.out"
+
+Determining if the C compiler works passed with the following output:
+Change Dir: /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec3410705760/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec3410705760.dir/build.make CMakeFiles/cmTryCompileExec3410705760.dir/build
+make[1]: Entering directory `/home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3410705760.dir/testCCompiler.c.o
+/usr/bin/gcc    -o CMakeFiles/cmTryCompileExec3410705760.dir/testCCompiler.c.o   -c /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp/testCCompiler.c
+Linking C executable cmTryCompileExec3410705760
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3410705760.dir/link.txt --verbose=1
+/usr/bin/gcc         CMakeFiles/cmTryCompileExec3410705760.dir/testCCompiler.c.o  -o cmTryCompileExec3410705760 -rdynamic 
+make[1]: Leaving directory `/home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp'
+
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec3824042628/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec3824042628.dir/build.make CMakeFiles/cmTryCompileExec3824042628.dir/build
+make[1]: Entering directory `/home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3824042628.dir/CMakeCCompilerABI.c.o
+/usr/bin/gcc    -o CMakeFiles/cmTryCompileExec3824042628.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-2.8/Modules/CMakeCCompilerABI.c
+Linking C executable cmTryCompileExec3824042628
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3824042628.dir/link.txt --verbose=1
+/usr/bin/gcc       -v CMakeFiles/cmTryCompileExec3824042628.dir/CMakeCCompilerABI.c.o  -o cmTryCompileExec3824042628 -rdynamic  
+Using built-in specs.
+COLLECT_GCC=/usr/bin/gcc
+COLLECT_LTO_WRAPPER=/usr/lib/gcc/i486-linux-gnu/4.7/lto-wrapper
+Target: i486-linux-gnu
+Configured with: ../src/configure -v --with-pkgversion='Debian 4.7.2-5' --with-bugurl=file:///usr/share/doc/gcc-4.7/README.Bugs --enable-languages=c,c++,go,fortran,objc,obj-c++ --prefix=/usr --program-suffix=-4.7 --enable-shared --enable-linker-build-id --with-system-zlib --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --with-gxx-include-dir=/usr/include/c++/4.7 --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --enable-gnu-unique-object --enable-plugin --enable-objc-gc --enable-targets=all --with-arch-32=i586 --with-tune=generic --enable-checking=release --build=i486-linux-gnu --host=i486-linux-gnu --target=i486-linux-gnu
+Thread model: posix
+gcc version 4.7.2 (Debian 4.7.2-5) 
+COMPILER_PATH=/usr/lib/gcc/i486-linux-gnu/4.7/:/usr/lib/gcc/i486-linux-gnu/4.7/:/usr/lib/gcc/i486-linux-gnu/:/usr/lib/gcc/i486-linux-gnu/4.7/:/usr/lib/gcc/i486-linux-gnu/
+LIBRARY_PATH=/usr/lib/gcc/i486-linux-gnu/4.7/:/usr/lib/gcc/i486-linux-gnu/4.7/../../../i386-linux-gnu/:/usr/lib/gcc/i486-linux-gnu/4.7/../../../../lib/:/lib/i386-linux-gnu/:/lib/../lib/:/usr/lib/i386-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/i486-linux-gnu/4.7/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec3824042628' '-rdynamic' '-mtune=generic' '-march=i586'
+ /usr/lib/gcc/i486-linux-gnu/4.7/collect2 --sysroot=/ --build-id --no-add-needed --eh-frame-hdr -m elf_i386 --hash-style=both -export-dynamic -dynamic-linker /lib/ld-linux.so.2 -o cmTryCompileExec3824042628 /usr/lib/gcc/i486-linux-gnu/4.7/../../../i386-linux-gnu/crt1.o /usr/lib/gcc/i486-linux-gnu/4.7/../../../i386-linux-gnu/crti.o /usr/lib/gcc/i486-linux-gnu/4.7/crtbegin.o -L/usr/lib/gcc/i486-linux-gnu/4.7 -L/usr/lib/gcc/i486-linux-gnu/4.7/../../../i386-linux-gnu -L/usr/lib/gcc/i486-linux-gnu/4.7/../../../../lib -L/lib/i386-linux-gnu -L/lib/../lib -L/usr/lib/i386-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/i486-linux-gnu/4.7/../../.. CMakeFiles/cmTryCompileExec3824042628.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/i486-linux-gnu/4.7/crtend.o /usr/lib/gcc/i486-linux-gnu/4.7/../../../i386-linux-gnu/crtn.o
+make[1]: Leaving directory `/home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp'
+
+
+Parsed C implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command:/usr/bin/make "cmTryCompileExec3824042628/fast"]
+  ignore line: [/usr/bin/make -f CMakeFiles/cmTryCompileExec3824042628.dir/build.make CMakeFiles/cmTryCompileExec3824042628.dir/build]
+  ignore line: [make[1]: Entering directory `/home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp']
+  ignore line: [/usr/bin/cmake -E cmake_progress_report /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp/CMakeFiles 1]
+  ignore line: [Building C object CMakeFiles/cmTryCompileExec3824042628.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/usr/bin/gcc    -o CMakeFiles/cmTryCompileExec3824042628.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-2.8/Modules/CMakeCCompilerABI.c]
+  ignore line: [Linking C executable cmTryCompileExec3824042628]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3824042628.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/gcc       -v CMakeFiles/cmTryCompileExec3824042628.dir/CMakeCCompilerABI.c.o  -o cmTryCompileExec3824042628 -rdynamic  ]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/usr/bin/gcc]
+  ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/i486-linux-gnu/4.7/lto-wrapper]
+  ignore line: [Target: i486-linux-gnu]
+  ignore line: [Configured with: ../src/configure -v --with-pkgversion='Debian 4.7.2-5' --with-bugurl=file:///usr/share/doc/gcc-4.7/README.Bugs --enable-languages=c,c++,go,fortran,objc,obj-c++ --prefix=/usr --program-suffix=-4.7 --enable-shared --enable-linker-build-id --with-system-zlib --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --with-gxx-include-dir=/usr/include/c++/4.7 --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --enable-gnu-unique-object --enable-plugin --enable-objc-gc --enable-targets=all --with-arch-32=i586 --with-tune=generic --enable-checking=release --build=i486-linux-gnu --host=i486-linux-gnu --target=i486-linux-gnu]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 4.7.2 (Debian 4.7.2-5) ]
+  ignore line: [COMPILER_PATH=/usr/lib/gcc/i486-linux-gnu/4.7/:/usr/lib/gcc/i486-linux-gnu/4.7/:/usr/lib/gcc/i486-linux-gnu/:/usr/lib/gcc/i486-linux-gnu/4.7/:/usr/lib/gcc/i486-linux-gnu/]
+  ignore line: [LIBRARY_PATH=/usr/lib/gcc/i486-linux-gnu/4.7/:/usr/lib/gcc/i486-linux-gnu/4.7/../../../i386-linux-gnu/:/usr/lib/gcc/i486-linux-gnu/4.7/../../../../lib/:/lib/i386-linux-gnu/:/lib/../lib/:/usr/lib/i386-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/i486-linux-gnu/4.7/../../../:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec3824042628' '-rdynamic' '-mtune=generic' '-march=i586']
+  link line: [ /usr/lib/gcc/i486-linux-gnu/4.7/collect2 --sysroot=/ --build-id --no-add-needed --eh-frame-hdr -m elf_i386 --hash-style=both -export-dynamic -dynamic-linker /lib/ld-linux.so.2 -o cmTryCompileExec3824042628 /usr/lib/gcc/i486-linux-gnu/4.7/../../../i386-linux-gnu/crt1.o /usr/lib/gcc/i486-linux-gnu/4.7/../../../i386-linux-gnu/crti.o /usr/lib/gcc/i486-linux-gnu/4.7/crtbegin.o -L/usr/lib/gcc/i486-linux-gnu/4.7 -L/usr/lib/gcc/i486-linux-gnu/4.7/../../../i386-linux-gnu -L/usr/lib/gcc/i486-linux-gnu/4.7/../../../../lib -L/lib/i386-linux-gnu -L/lib/../lib -L/usr/lib/i386-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/i486-linux-gnu/4.7/../../.. CMakeFiles/cmTryCompileExec3824042628.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/i486-linux-gnu/4.7/crtend.o /usr/lib/gcc/i486-linux-gnu/4.7/../../../i386-linux-gnu/crtn.o]
+    arg [/usr/lib/gcc/i486-linux-gnu/4.7/collect2] ==> ignore
+    arg [--sysroot=/] ==> ignore
+    arg [--build-id] ==> ignore
+    arg [--no-add-needed] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [-m] ==> ignore
+    arg [elf_i386] ==> ignore
+    arg [--hash-style=both] ==> ignore
+    arg [-export-dynamic] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/lib/ld-linux.so.2] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTryCompileExec3824042628] ==> ignore
+    arg [/usr/lib/gcc/i486-linux-gnu/4.7/../../../i386-linux-gnu/crt1.o] ==> ignore
+    arg [/usr/lib/gcc/i486-linux-gnu/4.7/../../../i386-linux-gnu/crti.o] ==> ignore
+    arg [/usr/lib/gcc/i486-linux-gnu/4.7/crtbegin.o] ==> ignore
+    arg [-L/usr/lib/gcc/i486-linux-gnu/4.7] ==> dir [/usr/lib/gcc/i486-linux-gnu/4.7]
+    arg [-L/usr/lib/gcc/i486-linux-gnu/4.7/../../../i386-linux-gnu] ==> dir [/usr/lib/gcc/i486-linux-gnu/4.7/../../../i386-linux-gnu]
+    arg [-L/usr/lib/gcc/i486-linux-gnu/4.7/../../../../lib] ==> dir [/usr/lib/gcc/i486-linux-gnu/4.7/../../../../lib]
+    arg [-L/lib/i386-linux-gnu] ==> dir [/lib/i386-linux-gnu]
+    arg [-L/lib/../lib] ==> dir [/lib/../lib]
+    arg [-L/usr/lib/i386-linux-gnu] ==> dir [/usr/lib/i386-linux-gnu]
+    arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
+    arg [-L/usr/lib/gcc/i486-linux-gnu/4.7/../../..] ==> dir [/usr/lib/gcc/i486-linux-gnu/4.7/../../..]
+    arg [CMakeFiles/cmTryCompileExec3824042628.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [-lgcc] ==> lib [gcc]
+    arg [--as-needed] ==> ignore
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [--no-as-needed] ==> ignore
+    arg [-lc] ==> lib [c]
+    arg [-lgcc] ==> lib [gcc]
+    arg [--as-needed] ==> ignore
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [--no-as-needed] ==> ignore
+    arg [/usr/lib/gcc/i486-linux-gnu/4.7/crtend.o] ==> ignore
+    arg [/usr/lib/gcc/i486-linux-gnu/4.7/../../../i386-linux-gnu/crtn.o] ==> ignore
+  remove lib [gcc]
+  remove lib [gcc_s]
+  remove lib [gcc]
+  remove lib [gcc_s]
+  collapse dir [/usr/lib/gcc/i486-linux-gnu/4.7] ==> [/usr/lib/gcc/i486-linux-gnu/4.7]
+  collapse dir [/usr/lib/gcc/i486-linux-gnu/4.7/../../../i386-linux-gnu] ==> [/usr/lib/i386-linux-gnu]
+  collapse dir [/usr/lib/gcc/i486-linux-gnu/4.7/../../../../lib] ==> [/usr/lib]
+  collapse dir [/lib/i386-linux-gnu] ==> [/lib/i386-linux-gnu]
+  collapse dir [/lib/../lib] ==> [/lib]
+  collapse dir [/usr/lib/i386-linux-gnu] ==> [/usr/lib/i386-linux-gnu]
+  collapse dir [/usr/lib/../lib] ==> [/usr/lib]
+  collapse dir [/usr/lib/gcc/i486-linux-gnu/4.7/../../..] ==> [/usr/lib]
+  implicit libs: [c]
+  implicit dirs: [/usr/lib/gcc/i486-linux-gnu/4.7;/usr/lib/i386-linux-gnu;/usr/lib;/lib/i386-linux-gnu;/lib]
+
+
+Determining if the include file sys/types.h exists passed with the following output:
+Change Dir: /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec2868276761/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec2868276761.dir/build.make CMakeFiles/cmTryCompileExec2868276761.dir/build
+make[1]: Entering directory `/home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec2868276761.dir/CheckIncludeFile.c.o
+/usr/bin/gcc    -o CMakeFiles/cmTryCompileExec2868276761.dir/CheckIncludeFile.c.o   -c /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTryCompileExec2868276761
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2868276761.dir/link.txt --verbose=1
+/usr/bin/gcc         CMakeFiles/cmTryCompileExec2868276761.dir/CheckIncludeFile.c.o  -o cmTryCompileExec2868276761 -rdynamic 
+make[1]: Leaving directory `/home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp'
+
+
+Determining if the include file stdint.h exists passed with the following output:
+Change Dir: /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec1067516504/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec1067516504.dir/build.make CMakeFiles/cmTryCompileExec1067516504.dir/build
+make[1]: Entering directory `/home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec1067516504.dir/CheckIncludeFile.c.o
+/usr/bin/gcc    -o CMakeFiles/cmTryCompileExec1067516504.dir/CheckIncludeFile.c.o   -c /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTryCompileExec1067516504
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1067516504.dir/link.txt --verbose=1
+/usr/bin/gcc         CMakeFiles/cmTryCompileExec1067516504.dir/CheckIncludeFile.c.o  -o cmTryCompileExec1067516504 -rdynamic 
+make[1]: Leaving directory `/home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp'
+
+
+Determining if the include file stddef.h exists passed with the following output:
+Change Dir: /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec3338287138/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec3338287138.dir/build.make CMakeFiles/cmTryCompileExec3338287138.dir/build
+make[1]: Entering directory `/home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3338287138.dir/CheckIncludeFile.c.o
+/usr/bin/gcc    -o CMakeFiles/cmTryCompileExec3338287138.dir/CheckIncludeFile.c.o   -c /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTryCompileExec3338287138
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3338287138.dir/link.txt --verbose=1
+/usr/bin/gcc         CMakeFiles/cmTryCompileExec3338287138.dir/CheckIncludeFile.c.o  -o cmTryCompileExec3338287138 -rdynamic 
+make[1]: Leaving directory `/home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp'
+
+
+Determining size of unsigned short passed with the following output:
+Change Dir: /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec541862437/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec541862437.dir/build.make CMakeFiles/cmTryCompileExec541862437.dir/build
+make[1]: Entering directory `/home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec541862437.dir/CMAKE_SIZEOF_UNSIGNED_SHORT.c.o
+/usr/bin/gcc    -o CMakeFiles/cmTryCompileExec541862437.dir/CMAKE_SIZEOF_UNSIGNED_SHORT.c.o   -c /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CheckTypeSize/CMAKE_SIZEOF_UNSIGNED_SHORT.c
+Linking C executable cmTryCompileExec541862437
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec541862437.dir/link.txt --verbose=1
+/usr/bin/gcc         CMakeFiles/cmTryCompileExec541862437.dir/CMAKE_SIZEOF_UNSIGNED_SHORT.c.o  -o cmTryCompileExec541862437 -rdynamic 
+make[1]: Leaving directory `/home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp'
+
+
+Determining if the include file string.h exists passed with the following output:
+Change Dir: /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec3944041646/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec3944041646.dir/build.make CMakeFiles/cmTryCompileExec3944041646.dir/build
+make[1]: Entering directory `/home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3944041646.dir/CheckIncludeFile.c.o
+/usr/bin/gcc    -o CMakeFiles/cmTryCompileExec3944041646.dir/CheckIncludeFile.c.o   -c /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTryCompileExec3944041646
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3944041646.dir/link.txt --verbose=1
+/usr/bin/gcc         CMakeFiles/cmTryCompileExec3944041646.dir/CheckIncludeFile.c.o  -o cmTryCompileExec3944041646 -rdynamic 
+make[1]: Leaving directory `/home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp'
+
+
+Determining if the include file memory.h exists passed with the following output:
+Change Dir: /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec2760291141/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec2760291141.dir/build.make CMakeFiles/cmTryCompileExec2760291141.dir/build
+make[1]: Entering directory `/home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec2760291141.dir/CheckIncludeFile.c.o
+/usr/bin/gcc    -o CMakeFiles/cmTryCompileExec2760291141.dir/CheckIncludeFile.c.o   -c /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTryCompileExec2760291141
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2760291141.dir/link.txt --verbose=1
+/usr/bin/gcc         CMakeFiles/cmTryCompileExec2760291141.dir/CheckIncludeFile.c.o  -o cmTryCompileExec2760291141 -rdynamic 
+make[1]: Leaving directory `/home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp'
+
+
+Determining if the include file stdlib.h exists passed with the following output:
+Change Dir: /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec3771016293/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec3771016293.dir/build.make CMakeFiles/cmTryCompileExec3771016293.dir/build
+make[1]: Entering directory `/home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3771016293.dir/CheckIncludeFile.c.o
+/usr/bin/gcc    -o CMakeFiles/cmTryCompileExec3771016293.dir/CheckIncludeFile.c.o   -c /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTryCompileExec3771016293
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3771016293.dir/link.txt --verbose=1
+/usr/bin/gcc         CMakeFiles/cmTryCompileExec3771016293.dir/CheckIncludeFile.c.o  -o cmTryCompileExec3771016293 -rdynamic 
+make[1]: Leaving directory `/home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp'
+
+
+Determining if the include file stdio.h exists passed with the following output:
+Change Dir: /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec2339648971/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec2339648971.dir/build.make CMakeFiles/cmTryCompileExec2339648971.dir/build
+make[1]: Entering directory `/home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec2339648971.dir/CheckIncludeFile.c.o
+/usr/bin/gcc    -o CMakeFiles/cmTryCompileExec2339648971.dir/CheckIncludeFile.c.o   -c /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTryCompileExec2339648971
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2339648971.dir/link.txt --verbose=1
+/usr/bin/gcc         CMakeFiles/cmTryCompileExec2339648971.dir/CheckIncludeFile.c.o  -o cmTryCompileExec2339648971 -rdynamic 
+make[1]: Leaving directory `/home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp'
+
+
+Determining if the include file math.h exists passed with the following output:
+Change Dir: /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec3162688604/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec3162688604.dir/build.make CMakeFiles/cmTryCompileExec3162688604.dir/build
+make[1]: Entering directory `/home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3162688604.dir/CheckIncludeFile.c.o
+/usr/bin/gcc    -o CMakeFiles/cmTryCompileExec3162688604.dir/CheckIncludeFile.c.o   -c /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTryCompileExec3162688604
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3162688604.dir/link.txt --verbose=1
+/usr/bin/gcc         CMakeFiles/cmTryCompileExec3162688604.dir/CheckIncludeFile.c.o  -o cmTryCompileExec3162688604 -rdynamic 
+make[1]: Leaving directory `/home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp'
+
+
+Determining if the include file float.h exists passed with the following output:
+Change Dir: /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec485012464/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec485012464.dir/build.make CMakeFiles/cmTryCompileExec485012464.dir/build
+make[1]: Entering directory `/home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec485012464.dir/CheckIncludeFile.c.o
+/usr/bin/gcc    -o CMakeFiles/cmTryCompileExec485012464.dir/CheckIncludeFile.c.o   -c /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTryCompileExec485012464
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec485012464.dir/link.txt --verbose=1
+/usr/bin/gcc         CMakeFiles/cmTryCompileExec485012464.dir/CheckIncludeFile.c.o  -o cmTryCompileExec485012464 -rdynamic 
+make[1]: Leaving directory `/home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp'
+
+
+Determining if the include file time.h exists passed with the following output:
+Change Dir: /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec570885936/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec570885936.dir/build.make CMakeFiles/cmTryCompileExec570885936.dir/build
+make[1]: Entering directory `/home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec570885936.dir/CheckIncludeFile.c.o
+/usr/bin/gcc    -o CMakeFiles/cmTryCompileExec570885936.dir/CheckIncludeFile.c.o   -c /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTryCompileExec570885936
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec570885936.dir/link.txt --verbose=1
+/usr/bin/gcc         CMakeFiles/cmTryCompileExec570885936.dir/CheckIncludeFile.c.o  -o cmTryCompileExec570885936 -rdynamic 
+make[1]: Leaving directory `/home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp'
+
+
+Determining if the include file stdarg.h exists passed with the following output:
+Change Dir: /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec2542631148/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec2542631148.dir/build.make CMakeFiles/cmTryCompileExec2542631148.dir/build
+make[1]: Entering directory `/home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec2542631148.dir/CheckIncludeFile.c.o
+/usr/bin/gcc    -o CMakeFiles/cmTryCompileExec2542631148.dir/CheckIncludeFile.c.o   -c /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTryCompileExec2542631148
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2542631148.dir/link.txt --verbose=1
+/usr/bin/gcc         CMakeFiles/cmTryCompileExec2542631148.dir/CheckIncludeFile.c.o  -o cmTryCompileExec2542631148 -rdynamic 
+make[1]: Leaving directory `/home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp'
+
+
+Determining if the include file ctype.h exists passed with the following output:
+Change Dir: /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec3102222860/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec3102222860.dir/build.make CMakeFiles/cmTryCompileExec3102222860.dir/build
+make[1]: Entering directory `/home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3102222860.dir/CheckIncludeFile.c.o
+/usr/bin/gcc    -o CMakeFiles/cmTryCompileExec3102222860.dir/CheckIncludeFile.c.o   -c /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTryCompileExec3102222860
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3102222860.dir/link.txt --verbose=1
+/usr/bin/gcc         CMakeFiles/cmTryCompileExec3102222860.dir/CheckIncludeFile.c.o  -o cmTryCompileExec3102222860 -rdynamic 
+make[1]: Leaving directory `/home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp'
+
+
+Determining if the include file assert.h exists passed with the following output:
+Change Dir: /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec2917277127/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec2917277127.dir/build.make CMakeFiles/cmTryCompileExec2917277127.dir/build
+make[1]: Entering directory `/home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec2917277127.dir/CheckIncludeFile.c.o
+/usr/bin/gcc    -o CMakeFiles/cmTryCompileExec2917277127.dir/CheckIncludeFile.c.o   -c /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTryCompileExec2917277127
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2917277127.dir/link.txt --verbose=1
+/usr/bin/gcc         CMakeFiles/cmTryCompileExec2917277127.dir/CheckIncludeFile.c.o  -o cmTryCompileExec2917277127 -rdynamic 
+make[1]: Leaving directory `/home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp'
+
+
+Determining if the include file stdint.h exists passed with the following output:
+Change Dir: /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec3467616118/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec3467616118.dir/build.make CMakeFiles/cmTryCompileExec3467616118.dir/build
+make[1]: Entering directory `/home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3467616118.dir/CheckIncludeFile.c.o
+/usr/bin/gcc    -o CMakeFiles/cmTryCompileExec3467616118.dir/CheckIncludeFile.c.o   -c /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTryCompileExec3467616118
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3467616118.dir/link.txt --verbose=1
+/usr/bin/gcc         CMakeFiles/cmTryCompileExec3467616118.dir/CheckIncludeFile.c.o  -o cmTryCompileExec3467616118 -rdynamic 
+make[1]: Leaving directory `/home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp'
+
+
+Determining if the include file inttypes.h exists passed with the following output:
+Change Dir: /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec1701112709/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec1701112709.dir/build.make CMakeFiles/cmTryCompileExec1701112709.dir/build
+make[1]: Entering directory `/home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec1701112709.dir/CheckIncludeFile.c.o
+/usr/bin/gcc    -o CMakeFiles/cmTryCompileExec1701112709.dir/CheckIncludeFile.c.o   -c /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTryCompileExec1701112709
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1701112709.dir/link.txt --verbose=1
+/usr/bin/gcc         CMakeFiles/cmTryCompileExec1701112709.dir/CheckIncludeFile.c.o  -o cmTryCompileExec1701112709 -rdynamic 
+make[1]: Leaving directory `/home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp'
+
+
+Determining if the include file strings.h exists passed with the following output:
+Change Dir: /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec2556325940/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec2556325940.dir/build.make CMakeFiles/cmTryCompileExec2556325940.dir/build
+make[1]: Entering directory `/home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec2556325940.dir/CheckIncludeFile.c.o
+/usr/bin/gcc    -o CMakeFiles/cmTryCompileExec2556325940.dir/CheckIncludeFile.c.o   -c /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTryCompileExec2556325940
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2556325940.dir/link.txt --verbose=1
+/usr/bin/gcc         CMakeFiles/cmTryCompileExec2556325940.dir/CheckIncludeFile.c.o  -o cmTryCompileExec2556325940 -rdynamic 
+make[1]: Leaving directory `/home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp'
+
+
+Determining if the include file sys/stat.h exists passed with the following output:
+Change Dir: /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec3235678211/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec3235678211.dir/build.make CMakeFiles/cmTryCompileExec3235678211.dir/build
+make[1]: Entering directory `/home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3235678211.dir/CheckIncludeFile.c.o
+/usr/bin/gcc    -o CMakeFiles/cmTryCompileExec3235678211.dir/CheckIncludeFile.c.o   -c /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTryCompileExec3235678211
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3235678211.dir/link.txt --verbose=1
+/usr/bin/gcc         CMakeFiles/cmTryCompileExec3235678211.dir/CheckIncludeFile.c.o  -o cmTryCompileExec3235678211 -rdynamic 
+make[1]: Leaving directory `/home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp'
+
+
+Determining if the include file unistd.h exists passed with the following output:
+Change Dir: /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec665608080/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec665608080.dir/build.make CMakeFiles/cmTryCompileExec665608080.dir/build
+make[1]: Entering directory `/home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec665608080.dir/CheckIncludeFile.c.o
+/usr/bin/gcc    -o CMakeFiles/cmTryCompileExec665608080.dir/CheckIncludeFile.c.o   -c /home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTryCompileExec665608080
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec665608080.dir/link.txt --verbose=1
+/usr/bin/gcc         CMakeFiles/cmTryCompileExec665608080.dir/CheckIncludeFile.c.o  -o cmTryCompileExec665608080 -rdynamic 
+make[1]: Leaving directory `/home/schurli/quality-double-compression/lib/openjpeg-2.1.0/CMakeFiles/CMakeTmp'
+
+
