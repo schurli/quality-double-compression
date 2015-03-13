@@ -4,6 +4,17 @@ all:
 	cd lib/jpeg-9a/ && ./configure && $(MAKE)
 	cd lib/openjpeg-2.1.0/ && cmake . && $(MAKE)
 	cd lib/iqa/ && $(MAKE) RELEASE=1
+
+bitrate:
+	rm -rf out/
+	mkdir out/
+	gcc -c -DGCC ./test_bitrate.c
+	gcc -o test_bitrate test_bitrate.o
+	./test_bitrate mikro.bmp
+
+cleanbitrate:
+	rm -f test_bitrate test_bitrate.o
+
 clean:
 	cd lib/jxrlib-master/ && $(MAKE) clean
 	cd lib/jpeg-9a/ && $(MAKE) clean

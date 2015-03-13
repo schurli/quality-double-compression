@@ -26,3 +26,9 @@
 *.exe
 *.out
 *.app
+test_bitrate
+
+# Other thingis
+out/*
+.idea/
+*.bmp
