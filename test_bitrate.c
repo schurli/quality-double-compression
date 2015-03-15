@@ -51,7 +51,7 @@ char path_jpeg_enc[] = "./lib/jpeg-9a/cjpeg -quality %d -outfile %s %s";
  * 1st wildcard is output file (bmp)
  * 2nd wildcard is input file (jpg)
  */
-char path_jpeg_dec[] = "./lib/jpeg-9a/djpeg -outfile %s %s";
+char path_jpeg_dec[] = "./lib/jpeg-9a/djpeg -bmp -outfile %s %s";
 
 /**
  * Directory for output.
