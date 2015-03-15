@@ -324,15 +324,19 @@ int
 main(int argc, const char* argv[])
 {
   char input_file[1000];
-  if (argc > 1) {
+  float bppf;
+  if (argc > 2) {
     strcpy(input_file, argv[1]);
+    bppf = atof(argv[2]);
   } else {
-    printf("usage: test_bitrate image.bmp\n");
+    printf("usage: test_bitrate image.bmp 0.08\n");
     return 0;
   }
 
-  double bpp = 0.01;
+  double bpp = (double) bppf;
+  printf("Parameters: %f bpp and input file %s\n", bpp, input_file);
   encode_image(&jpeg_2000_enc, &jpeg_2000_dec, "j2k", input_file, bpp);
+  
   encode_image(&jpeg_xr_enc, &jpeg_xr_dec, "jxr", input_file, bpp);
   encode_image(&jpeg_enc, &jpeg_dec,"jpg", input_file, bpp);
 

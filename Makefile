@@ -10,9 +10,9 @@ bitrate:
 	mkdir out/
 	gcc -c -DGCC ./test_bitrate.c
 	gcc -o test_bitrate test_bitrate.o
-	./test_bitrate mikro.bmp
+	./test_bitrate cat.bmp 0.17
 
-cleanbitrate:
+bitrate-clean:
 	rm -f test_bitrate test_bitrate.o
 
 doc: doxy
