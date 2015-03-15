@@ -15,6 +15,15 @@ bitrate:
 cleanbitrate:
 	rm -f test_bitrate test_bitrate.o
 
+doc: doxy
+
+doxy:
+	doxygen doxygen.config
+	man doc/man/man3/test_bitrate.c.3
+
+doc-clean:
+	rm -rf doc/*
+
 clean:
 	cd lib/jxrlib-master/ && $(MAKE) clean
 	cd lib/jpeg-9a/ && $(MAKE) clean

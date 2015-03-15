@@ -1,4 +1,9 @@
+/**
+ * @file
+ * @brief Main file.
+ */
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <libgen.h>
 
@@ -255,7 +260,7 @@ encode_image(encodeFunction enc, decodeFunction dec, char* ext, char* in, double
   char out_bmp[1000];
 
   // create jpeg file path
-  strcpy(out_jpeg, "out/");
+  strcpy(out_jpeg, output_dir);
   strcat(out_jpeg, basename(in));
   // remove .bmp
   out_jpeg[(strlen(out_jpeg) - 4)] = '\0';
@@ -318,15 +323,15 @@ encode_image(encodeFunction enc, decodeFunction dec, char* ext, char* in, double
 int
 main(int argc, const char* argv[])
 {
-  char* input_file;
+  char input_file[1000];
   if (argc > 1) {
-    input_file = argv[1];
+    strcpy(input_file, argv[1]);
   } else {
     printf("usage: test_bitrate image.bmp\n");
     return 0;
   }
 
-  double bpp = 0.05;
+  double bpp = 0.01;
   encode_image(&jpeg_2000_enc, &jpeg_2000_dec, "j2k", input_file, bpp);
   encode_image(&jpeg_xr_enc, &jpeg_xr_dec, "jxr", input_file, bpp);
   encode_image(&jpeg_enc, &jpeg_dec,"jpg", input_file, bpp);

@@ -29,6 +29,7 @@
 test_bitrate
 
 # Other thingis
+doc/*
 out/*
 .idea/
 *.bmp
