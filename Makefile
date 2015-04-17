@@ -4,7 +4,7 @@ all:
 	cd lib/jpg-9a/ && ./configure && $(MAKE)
 	cd lib/j2k-2.1.0/ && cmake . && $(MAKE)
 	cd lib/vqi-0.3.3/ && $(MAKE) all
-	#cd lib/iqa/ && $(MAKE) RELEASE=1
+	cd lib/iqa-1.1.2/ && $(MAKE) RELEASE=1
 
 bitrate:
 	rm -rf out/
@@ -30,4 +30,4 @@ clean:
 	cd lib/jpg-9a/ && $(MAKE) clean
 	cd lib/j2k-2.1.0/ && $(MAKE) clean
 	cd lib/vqi-0.3.3/ && $(MAKE) clean
-	#cd lib/iqa/ && $(MAKE) clean RELEASE=1
+	cd lib/iqa-1.1.2/ && $(MAKE) clean RELEASE=1

@@ -38,18 +38,18 @@ Use `make doc` to view documentation and `make doc-clean` to clean the generated
 
 * IQA
 
-    cd lib/iqa
+    cd lib/iqa-1.1.2/
     make RELEASE=1
 
 * VQI: Make sure you have downloaded and added the sources manually.
 
     cd lib/vqi-3.3.0/
+    make all
     
 
 ## De-/encoding:
 
 * JXRLIB
-
     * `./lib/jxr-1.1/JxrEncApp [options]`
     * `./lib/jxr-1.1/JxrDecApp [options]`
     * Call binaries without options to get more info.
@@ -67,6 +67,9 @@ Use `make doc` to view documentation and `make doc-clean` to clean the generated
 
 ## Calculate metrics
 
+* IQA
+    *
+
 * VQI
     * `./imagemetric dl/[metric.dl] [original] [compare]`
     * Available metrics are: `ess.dl,leg.dl,lfbvs.dl,lss.dl,mse.dl,nice.dl,psnr.dl,psnry.dl,ssim.dl,sun10a.dl,yao09a.dl`
@@ -74,6 +77,6 @@ Use `make doc` to view documentation and `make doc-clean` to clean the generated
 
 ## Development
 
-Create a standard conform bmp file in the root directory called mikro.bmp. 
+Create a standard conform bmp file in the root directory called cat.bmp.
 Use e.g. GIMP and enable the compatibility export option in the BMP save dialog.
 Use `make bitrate` to create test images in `out/`.
