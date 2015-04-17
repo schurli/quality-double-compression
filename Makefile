@@ -1,9 +1,9 @@
 
 all:
-	cd lib/jxrlib-master/ && $(MAKE)
-	cd lib/jpeg-9a/ && ./configure && $(MAKE)
-	cd lib/openjpeg-2.1.0/ && cmake . && $(MAKE)
-	cd lib/iqa/ && $(MAKE) RELEASE=1
+	cd lib/jxr-1.1/ && $(MAKE)
+	cd lib/jpg-9a/ && ./configure && $(MAKE)
+	cd lib/j2k-2.1.0/ && cmake . && $(MAKE)
+	#cd lib/iqa/ && $(MAKE) RELEASE=1
 
 bitrate:
 	rm -rf out/
@@ -25,7 +25,7 @@ doc-clean:
 	rm -rf doc/*
 
 clean:
-	cd lib/jxrlib-master/ && $(MAKE) clean
-	cd lib/jpeg-9a/ && $(MAKE) clean
-	cd lib/openjpeg-2.1.0/ && $(MAKE) clean
-	cd lib/iqa/ && $(MAKE) clean RELEASE=1
+	cd lib/jxr-1.1/ && $(MAKE) clean
+	cd lib/jpg-9a/ && $(MAKE) clean
+	cd lib/j2k-2.1.0/ && $(MAKE) clean
+	#cd lib/iqa/ && $(MAKE) clean RELEASE=1

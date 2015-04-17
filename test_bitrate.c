@@ -13,14 +13,14 @@
  * 2nd wildcard is output file (j2k)
  * 3rd wildcard is quality setting e.g. 30,40,50. Must be increasing 1st < 2nd < 3rd layer.
  */
-char path_jpeg2000_enc[] = "./lib/openjpeg-2.1.0/bin/opj_compress -i %s -o %s -q %s";
+char path_jpeg2000_enc[] = "./lib/j2k-2.1.0/bin/opj_compress -i %s -o %s -q %s";
 
 /**
  * Command to decompress JPEG2000
  * 1st wildcard is input file (j2k)
  * 2nd wildcard is output file (bmp)
  */
-char path_jpeg2000_dec[] = "./lib/openjpeg-2.1.0/bin/opj_decompress -i %s -o %s";
+char path_jpeg2000_dec[] = "./lib/j2k-2.1.0/bin/opj_decompress -i %s -o %s";
 
 /**
  * Command to compress JPEG XR
@@ -28,14 +28,14 @@ char path_jpeg2000_dec[] = "./lib/openjpeg-2.1.0/bin/opj_decompress -i %s -o %s"
  * 2nd wildcard is output file (jxr)
  * 3rd wildcard is quality setting 0.0 - 1.0
  */
-char path_jpegxr_enc[] = "./lib/jxrlib-master/JxrEncApp -i %s -o %s -q %f";
+char path_jpegxr_enc[] = "./lib/jxr-1.1/JxrEncApp -i %s -o %s -q %f";
 
 /**
  * Command to decompress JPEG XR
  * 1st wildcard is input file (jxr)
  * 2nd wildcard is output file (bmp)
  */
-char path_jpegxr_dec[] = "./lib/jxrlib-master/JxrDecApp -i %s -o %s";
+char path_jpegxr_dec[] = "./lib/jxr-1.1/JxrDecApp -i %s -o %s";
 
 /**
  * Command to compress JPEGv9
@@ -43,7 +43,7 @@ char path_jpegxr_dec[] = "./lib/jxrlib-master/JxrDecApp -i %s -o %s";
  * 2nd wildcard is output file (jpg)
  * 3rd wildcard is input file (bmp)
  */
-char path_jpeg_enc[] = "./lib/jpeg-9a/cjpeg -quality %d -outfile %s %s";
+char path_jpeg_enc[] = "./lib/jpg-9a/cjpeg -quality %d -outfile %s %s";
 
 
 /**
@@ -51,7 +51,7 @@ char path_jpeg_enc[] = "./lib/jpeg-9a/cjpeg -quality %d -outfile %s %s";
  * 1st wildcard is output file (bmp)
  * 2nd wildcard is input file (jpg)
  */
-char path_jpeg_dec[] = "./lib/jpeg-9a/djpeg -bmp -outfile %s %s";
+char path_jpeg_dec[] = "./lib/jpg-9a/djpeg -bmp -outfile %s %s";
 
 /**
  * Directory for output.
@@ -336,7 +336,7 @@ main(int argc, const char* argv[])
   double bpp = (double) bppf;
   printf("Parameters: %f bpp and input file %s\n", bpp, input_file);
   encode_image(&jpeg_2000_enc, &jpeg_2000_dec, "j2k", input_file, bpp);
-  
+
   encode_image(&jpeg_xr_enc, &jpeg_xr_dec, "jxr", input_file, bpp);
   encode_image(&jpeg_enc, &jpeg_dec,"jpg", input_file, bpp);
 
