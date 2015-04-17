@@ -13,6 +13,30 @@
 
 int compare (const FTSENT**, const FTSENT**);
 
+
+char leg_a[1023];
+char leg_b[1023];
+char msssim_a[1023];
+char msssim_b[1023];
+char sfloat[63];
+
+void
+wmetric (int pass, char *current_file, char *encoded_bmp)
+{
+  // LEG
+  sprintf(sfloat,"%f,",apply_metric("leg", current_file, encoded_bmp));
+  if(pass)
+    strcat(leg_b, sfloat);
+  else
+    strcat(leg_a, sfloat);
+  // MS-SSIM
+  sprintf(sfloat,"%f,",apply_metric("ms-ssim", current_file, encoded_bmp));
+  if(pass)
+    strcat(msssim_b, sfloat);
+  else
+    strcat(msssim_a, sfloat);
+}
+
 int
 process_dir(char * input_dir, char *output_dir1, char *output_dir2, float *bpps1, float *bpps2, int bppsc1, int bppsc2)
 {
@@ -21,6 +45,9 @@ process_dir(char * input_dir, char *output_dir1, char *output_dir2, float *bpps1
   FTSENT* parent = NULL;
 
   char *indir[] = { input_dir, NULL };
+
+  char *coders[] = { "jpg","j2k","jxr" };
+  FILE *out;
 
   file_system = fts_open(indir,FTS_COMFOLLOW | FTS_NOCHDIR, &compare);
 
@@ -42,32 +69,48 @@ process_dir(char * input_dir, char *output_dir1, char *output_dir2, float *bpps1
               char encoded_bmp[255];
               strcpy (current_file, child->fts_path);
               strcat (current_file, child->fts_name);
+
+              // start new line and write current file
+              strcpy(leg_a, current_file);
+              strcat(leg_a, ",");
+              strcpy(leg_b, current_file);
+              strcat(leg_b, ",");
+              strcpy(msssim_a, current_file);
+              strcat(msssim_a, ",");
+              strcpy(msssim_b, current_file);
+              strcat(msssim_b, ",");
               int i = 0;
               while (i < bppsc1)
                 {
-                  code_image ("jpg", current_file, output_dir1, encoded_bmp, bpps1[i]);
-                  if (bppsc2 != 0)
+                  int j = 0;
+                  while (j < 3)
                     {
-                      code_image ("jpg", encoded_bmp, output_dir2, encoded_bmp, bpps2[i]);
+                      code_image (coders[j], current_file, output_dir1, encoded_bmp, bpps1[i]);
+                      wmetric(0, current_file, encoded_bmp);
+                      if (bppsc2 != 0)
+                        {
+                          code_image (coders[j], encoded_bmp, output_dir2, encoded_bmp, bpps2[i]);
+                          wmetric(1, current_file, encoded_bmp);
+                        }
+                      j++;
                     }
-                  // apply metrics to encoded_bmp and current_file
-                  printf("LEG: %f\n", apply_metric("leg", current_file, encoded_bmp));
-                  printf("MS-SSIM: %f\n", apply_metric("ms-ssim", current_file, encoded_bmp));
-                  /**
-                  code_image ("j2k", current_file, output_dir1, encoded_bmp, bpps1[i]);
-                  if (bppsc2 != 0)
-                    {
-                      code_image ("j2k", encoded_bmp, output_dir2, encoded_bmp, bpps2[i]);
-                    }
-                  // apply metrics to encoded_bmp and current_file
-                  code_image ("jxr", current_file, output_dir1, encoded_bmp, bpps1[i]);
-                  if (bppsc2 != 0)
-                    {
-                      code_image ("jxr", encoded_bmp, output_dir2, encoded_bmp, bpps2[i]);
-                    }*/
-                  // apply metrics to encoded_bmp and current_file
                   i++;
                 }
+
+              // write new line to file
+              out = fopen("out/leg_a.csv", "a");
+              fprintf(out, "%s\n", leg_a);
+              fclose(out);
+              out = fopen("out/leg_b.csv", "a");
+              fprintf(out, "%s\n", leg_b);
+              fclose(out);
+              out = fopen("out/ms-ssim_a.csv", "a");
+              fprintf(out, "%s\n", msssim_a);
+              fclose(out);
+              out = fopen("out/ms-ssim_b.csv", "a");
+              fprintf(out, "%s\n", msssim_b);
+              fclose(out);
+              // next file
               child = child->fts_link;
             }
         }
@@ -151,7 +194,7 @@ main(int argc, char* argv[])
         passes2 = i;
         break;
       case '?':
-        fprintf (stderr, "./dcprocess -i [input-db] -o [output-dir] -m [metric] -a \"0.1,0.2,0.3\" -b \"0.075,0.175,0.275\"\n");
+        fprintf (stderr, "./dcprocess -i [input-db] -o [output-dir] -a \"0.1,0.2,0.3\" -b \"0.075,0.175,0.275\"\n");
         return 1;
       default:
         abort ();
@@ -165,7 +208,7 @@ main(int argc, char* argv[])
 
   if (passes1 == 0 || input_dir == NULL || output_dir == NULL || metric == NULL)
     {
-      fprintf (stderr, "./dcprocess -i [input-db] -o [output-dir] -m [metric] -a \"0.1,0.2,0.3\" -b \"0.075,0.175,0.275\"\n");
+      fprintf (stderr, "./dcprocess -i [input-db] -o [output-dir] -a \"0.1,0.2,0.3\" -b \"0.075,0.175,0.275\"\n");
       return 1;
     }
 
