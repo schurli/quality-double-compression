@@ -1,11 +1,9 @@
-/**
- * @file
- * @brief Main file.
- */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <libgen.h>
+#include <unistd.h>
+#include "coder.h"
 
 /**
  * Command to compress JPEG2000
@@ -58,38 +56,6 @@ char path_jpeg_dec[] = "./lib/jpg-9a/djpeg -bmp -outfile %s %s";
  */
 char output_dir[] = "out/";
 
-/**
- * Bitmap header.
- */
-typedef struct
-{
-  char magic[2];
-  char size[4];
-  char reserved[4];
-  char offset[4];
-  char dibbytes[4];
-  char width[4];
-  char height[4];
-  char colorplanes[2];
-  char bpp[2];
-  char rawsize[4];
-  char hor_res[4];
-  char ver_res[4];
-  char colors[4];
-  char important[4];
-} bmp_t;
-
-/**
- * Type definition of an encode function pointer.
- * (Interface)
- */
-typedef int (*encodeFunction)(char*, char*, int);
-
-/**
- * Type definition of an decode function pointer.
- * (Interface)
- */
-typedef int (*decodeFunction)(char*, char*);
 
 /**
  * JPEG2000: Function to encode a bmp file to a j2k file with configurable quality.
@@ -211,6 +177,27 @@ char_to_uint(char* arr)
 }
 
 /**
+ * Read dimensions of bitmap image.
+ * @param char* filename Path to the bmp file.
+ * @return unsigned int* Number of pixels in width, height and stride of bmp file.
+ */
+unsigned int*
+get_dim(char* filename)
+{
+  char * buffer;
+  FILE * file = fopen(filename, "rb");
+  buffer = (char *) malloc(sizeof(bmp_t));
+  fread(buffer, 1, sizeof(bmp_t), file);
+  bmp_t * bmp = (bmp_t *) buffer;
+  fclose(file);
+  int *dim = malloc(sizeof(int)*3);
+  dim[0] = char_to_uint(bmp->width);
+  dim[1] = char_to_uint(bmp->height);
+  dim[2] = (dim[0] * ((bmp->bpp[0] + bmp->bpp[1]*256)/8) + 3) & ~3;
+  return dim;
+}
+
+/**
  * Read number of pixels from bmp file.
  * @param char* filename Path to the bmp file.
  * @return unsigned int Number of pixels in bmp file.
@@ -250,25 +237,26 @@ filesize(char* filename)
  * @param decodeFunction dec Function pointer to decoder function.
  * @param char* ext File extension for the encoded file.
  * @param char* in Path to input bmp.
+ * @param char* outdir Path to output dir.
+ * @param char* out Path to output bmp.
  * @param double bpp Bits per pixel of dest.
  * @return int error (0 is no error), int
  */
 int
-encode_image(encodeFunction enc, decodeFunction dec, char* ext, char* in, double bpp)
+encode_image(encodeFunction enc, decodeFunction dec, char* ext, char* in, char* outdir, char* out, double bpp)
 {
   char out_jpeg[1000];
   char out_bmp[1000];
 
   // create jpeg file path
-  strcpy(out_jpeg, output_dir);
+  strcpy(out_jpeg, outdir);
   strcat(out_jpeg, basename(in));
   // remove .bmp
   out_jpeg[(strlen(out_jpeg) - 4)] = '\0';
   strcat(out_jpeg, ".");
   strcat(out_jpeg, ext);
   // derive bmp path from jpeg path
-  strcpy(out_bmp, out_jpeg);
-  strcat(out_bmp, ".bmp");
+  sprintf(out_bmp, "%s-%f%s", out_jpeg, bpp, ".bmp");
 
   // Get total number of pixels in image
   unsigned int pixels = get_number_of_pixels_bmp(in);
@@ -309,36 +297,41 @@ encode_image(encodeFunction enc, decodeFunction dec, char* ext, char* in, double
 
   // Decode and store result as bmp.
   (*dec)(out_jpeg, out_bmp);
+  strcpy(out, out_bmp);
+
+  // Delete jpeg
+  unlink(out_jpeg);
 
   printf("Type %s (size: %d, target size: %d, quality: %f)\n", ext, size, des_size, quality);
   return 0;
 }
 
 /**
- * The main procedure
- * @param int argc argument count
- * @param char* argv array of command line arguments
- * @return int status
+ * Final wrapper for all supported codecs.
+ * @param char* ext File extension of the encoded file.
+ * @param char* in Path to input bmp.
+ * @param char* outdir Path to output dir.
+ * @param char* out Path to output file.
+ * @param double bpp Bits per pixel of dest.
+ * @return int error (0 is no error), int
  */
 int
-main(int argc, const char* argv[])
+code_image (char* ext, char* in, char* outdir, char* out, double bpp)
 {
-  char input_file[1000];
-  float bppf;
-  if (argc > 2) {
-    strcpy(input_file, argv[1]);
-    bppf = atof(argv[2]);
-  } else {
-    printf("usage: test_bitrate image.bmp 0.08\n");
-    return 0;
-  }
-
-  double bpp = (double) bppf;
-  printf("Parameters: %f bpp and input file %s\n", bpp, input_file);
-  encode_image(&jpeg_2000_enc, &jpeg_2000_dec, "j2k", input_file, bpp);
-
-  encode_image(&jpeg_xr_enc, &jpeg_xr_dec, "jxr", input_file, bpp);
-  encode_image(&jpeg_enc, &jpeg_dec,"jpg", input_file, bpp);
-
-  return 0;
+  if (strcmp(ext, "jpg") == 0)
+    {
+      encode_image(&jpeg_enc, &jpeg_dec, ext, in, outdir, out, bpp);
+    }
+  else if (strcmp(ext,"j2k") == 0)
+    {
+      encode_image(&jpeg_2000_enc, &jpeg_2000_dec, ext, in, outdir, out, bpp);
+    }
+  else if (strcmp(ext,"jxr") == 0)
+    {
+      encode_image(&jpeg_xr_enc, &jpeg_xr_dec, ext, in, outdir, out, bpp);
+    }
+  else
+    {
+      return 1; // error
+    }
 }

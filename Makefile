@@ -6,16 +6,6 @@ all:
 	cd lib/vqi-0.3.3/ && $(MAKE) all
 	cd lib/iqa-1.1.2/ && $(MAKE) RELEASE=1
 
-bitrate:
-	rm -rf out/
-	mkdir out/
-	gcc -c -DGCC ./test_bitrate.c
-	gcc -o test_bitrate test_bitrate.o
-	./test_bitrate cat.bmp 0.17
-
-bitrate-clean:
-	rm -f test_bitrate test_bitrate.o
-
 doc: doxy
 
 doxy:
@@ -24,6 +14,18 @@ doxy:
 
 doc-clean:
 	rm -rf doc/*
+
+dcprocess:
+	rm -rf out/
+	mkdir out/
+	gcc -c -DGCC -static src/dcprocess.c src/coder.c src/metrics.c src/bmp.c
+	gcc -lm -o dcprocess dcprocess.o coder.o metrics.o bmp.o -Llib/iqa-1.1.2/build/release -liqa
+
+	./dcprocess -i test-db -o out -m leg -a "0.035,0.045,0.055" -b "0.02,0.03,0.04"
+	./dcprocess -i test-db -o out -m leg -a "0.02,0.03,0.04"
+
+dcprocess-clean:
+	rm -f dcprocess dcprocess.o coder.o metrics.o
 
 clean:
 	cd lib/jxr-1.1/ && $(MAKE) clean

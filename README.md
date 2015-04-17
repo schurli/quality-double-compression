@@ -45,7 +45,7 @@ Use `make doc` to view documentation and `make doc-clean` to clean the generated
 
     cd lib/vqi-3.3.0/
     make all
-    
+
 
 ## De-/encoding:
 
@@ -79,4 +79,21 @@ Use `make doc` to view documentation and `make doc-clean` to clean the generated
 
 Create a standard conform bmp file in the root directory called cat.bmp.
 Use e.g. GIMP and enable the compatibility export option in the BMP save dialog.
-Use `make bitrate` to create test images in `out/`.
+Use `make dcprocess` to compile the main program.
+
+## Usage and output
+
+Output is one CSV file per metric (e.g. `leg_a.csv`). Each row stores the data for one image resource. The first column
+contains an unique identifier (e.g. [db]/[filename]). The other columns are divided into groups, where each group
+contains the metric result for jpg, j2k and jxr. There are `n` groups in total, one for each specified target rate.
+
+The target rates can be specified as command line argument in the form of a comma separated list. The program expects
+two rate lists, if double compression should be applied. Following command line parameters are recognized:
+
+    ./dcprocess -i [input-db] -o [output-dir] -m [metric] -a "0.1,0.2,0.3" -b "0.075,0.175,0.275"
+
+    -i Path to a directory containing sample images
+    -o Output directory for all temporary images and the output CSV file
+    -m Metric to use. Following metrics can be used: leg,ms-ssim,nice,... (tbc)
+    -a List of bits per pixel for first pass. The output is stored in `[metric]_a.csv`
+    -b List of bits per pixel for second pass. The output is stored in `[metric]_b.csv`
