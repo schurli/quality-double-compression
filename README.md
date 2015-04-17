@@ -6,7 +6,6 @@ PS Multimedia Datenformate
 * JPEG2000: https://code.google.com/p/openjpeg/
 * JPEG XR: https://github.com/curasystems/jxrlib (clone of https://jxrlib.codeplex.com/)
 * JPEGv9: http://www.infai.org/jpeg/
-
 * Image Quality Assessment: http://tdistler.com/iqa/
 
 ## Dependencies:
@@ -21,39 +20,43 @@ options below. Once this is done go to the development section below.
 Use `make doc` to view documentation and `make doc-clean` to clean the generated doc.
 
 * JXRLIB
-    * `cd lib/jxrlib-master/`
-    * `make`
+
+    `cd lib/jxr-1.1/`
+    `make`
 
 * JPEG-9A
-    * `cd lib/jpeg-9a/`
-    * `./configure && make`
+
+    `cd lib/jpg-9a/`
+    `./configure && make`
 
 * OPENJPEG-2.1.0
-    * `cd lib/openjpeg-2.1.0/`
-    * `cmake .`
-    * `make`
+
+    `cd lib/j2k-2.1.0/`
+    `cmake .`
+    `make`
 
 * IQA
-    * `cd lib/iqa`
-    * `make RELEASE=1`
+
+    `cd lib/iqa`
+    `make RELEASE=1`
 
 ## De-/encoding:
 
 * JXRLIB
 
-    * `./lib/jxrlib-master/JxrEncApp [options]`
-    * `./lib/jxrlib-master/JxrDecApp [options]`
+    * `./lib/jxr-1.1/JxrEncApp [options]`
+    * `./lib/jxr-1.1/JxrDecApp [options]`
     * Call binaries without options to get more info.
 
 * JPEG-9A
-    * `./lib/jpeg-9a/cjpeg [switches] [imagefile] > [jpegfile]`
-    * `./lib/jpeg-9a/djpeg [switches] [jpegfile] > [imagefile]`
-    * See `./lib/jpeg-9a/usage.txt` for switches.
+    * `./lib/jpg-9a/cjpeg [switches] [imagefile] > [jpegfile]`
+    * `./lib/jpg-9a/djpeg [switches] [jpegfile] > [imagefile]`
+    * See `./lib/jpg-9a/usage.txt` for switches.
 
 * OPENJPEG-2.1.0
-    * `./lib/openjpeg-2.1.0/bin/opj_compress -i image.pgm -o image.j2k`
-    * `./lib/openjpeg-2.1.0/bin/opj_d###ecompress -i image.j2k -o image.pgm`
-    * See `./lib/openjpeg-2.1.0/bin/opj_compress -h` for further options.
+    * `./lib/j2k-2.1.0/bin/opj_compress -i image.pgm -o image.j2k`
+    * `./lib/j2k-2.1.0/bin/opj_decompress -i image.j2k -o image.pgm`
+    * See `./lib/j2k-2.1.0/bin/opj_compress -h` for further options.
 
 
 ## Development
