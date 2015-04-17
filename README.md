@@ -7,10 +7,11 @@ PS Multimedia Datenformate
 * JPEG XR: https://github.com/curasystems/jxrlib (clone of https://jxrlib.codeplex.com/)
 * JPEGv9: http://www.infai.org/jpeg/
 * Image Quality Assessment: http://tdistler.com/iqa/
+* Visual Quality Index Implementations: http://wavelab.at/sources/VQI/?hc_location=ufi
 
 ## Dependencies:
 
-* For building 3rd party libraries: `sudo apt-get install libbsd-dev cmake`
+* For building 3rd party libraries: `sudo apt-get install libbsd-dev cmake libfreeimage-dev`
 * For documentation: `sudo apt-get install doxygen`
 
 ## Building:
@@ -21,24 +22,29 @@ Use `make doc` to view documentation and `make doc-clean` to clean the generated
 
 * JXRLIB
 
-    `cd lib/jxr-1.1/`
-    `make`
+    cd lib/jxr-1.1/
+    make
 
 * JPEG-9A
 
-    `cd lib/jpg-9a/`
-    `./configure && make`
+    cd lib/jpg-9a/
+    ./configure && make
 
 * OPENJPEG-2.1.0
 
-    `cd lib/j2k-2.1.0/`
-    `cmake .`
-    `make`
+    cd lib/j2k-2.1.0/
+    cmake .
+    make
 
 * IQA
 
-    `cd lib/iqa`
-    `make RELEASE=1`
+    cd lib/iqa
+    make RELEASE=1
+
+* VQI: Make sure you have downloaded and added the sources manually.
+
+    cd lib/vqi-3.3.0/
+    
 
 ## De-/encoding:
 
@@ -57,6 +63,13 @@ Use `make doc` to view documentation and `make doc-clean` to clean the generated
     * `./lib/j2k-2.1.0/bin/opj_compress -i image.pgm -o image.j2k`
     * `./lib/j2k-2.1.0/bin/opj_decompress -i image.j2k -o image.pgm`
     * See `./lib/j2k-2.1.0/bin/opj_compress -h` for further options.
+
+
+## Calculate metrics
+
+* VQI
+    * `./imagemetric dl/[metric.dl] [original] [compare]`
+    * Available metrics are: `ess.dl,leg.dl,lfbvs.dl,lss.dl,mse.dl,nice.dl,psnr.dl,psnry.dl,ssim.dl,sun10a.dl,yao09a.dl`
 
 
 ## Development

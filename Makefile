@@ -3,6 +3,7 @@ all:
 	cd lib/jxr-1.1/ && $(MAKE)
 	cd lib/jpg-9a/ && ./configure && $(MAKE)
 	cd lib/j2k-2.1.0/ && cmake . && $(MAKE)
+	cd lib/vqi-0.3.3/ && $(MAKE) all
 	#cd lib/iqa/ && $(MAKE) RELEASE=1
 
 bitrate:
@@ -28,4 +29,5 @@ clean:
 	cd lib/jxr-1.1/ && $(MAKE) clean
 	cd lib/jpg-9a/ && $(MAKE) clean
 	cd lib/j2k-2.1.0/ && $(MAKE) clean
+	cd lib/vqi-0.3.3/ && $(MAKE) clean
 	#cd lib/iqa/ && $(MAKE) clean RELEASE=1

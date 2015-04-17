@@ -33,8 +33,10 @@ doc/*
 out/*
 .idea/
 *.bmp
+*.iml
 
 # Ignore new files in lib/*/* after adding
 /lib/jxr-1.1/*
 /lib/jpg-9a/*
 /lib/j2k-2.1.0/*
+/lib/vqi-0.3.3/*
