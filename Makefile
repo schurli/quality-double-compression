@@ -21,7 +21,7 @@ dcprocess:
 	gcc -c -DGCC -static src/dcprocess.c src/coder.c src/metrics.c src/bmp.c
 	gcc -lm -o dcprocess dcprocess.o coder.o metrics.o bmp.o -Llib/iqa-1.1.2/build/release -liqa
 
-	./dcprocess -i test-db -o out -m leg -a "0.035,0.045,0.055" -b "0.02,0.03,0.04"
+	./dcprocess -i test-db -o out -m leg -a "0.0275,0.03,0.0325,0.035,0.0375,0.04,0.0425,0.045,0.0475" -b "0.005,0.01,0.015,0.02,0.025,0.03,0.035,0.04,0.045"
 	#./dcprocess -i test-db -o out -m leg -a "0.02,0.03,0.04"
 
 dcprocess-clean:
