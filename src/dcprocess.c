@@ -103,6 +103,8 @@ process_dir(char * input_dir, char *output_dir1, char *output_dir2, float *bpps1
                         {
                           code_image (coders[j], encoded_bmp, output_dir2, encoded_bmp, bpps2[i]);
                           wmetric(1, current_file, encoded_bmp);
+                          // unlink bmp
+                          unlink(encoded_bmp);
                         }
                       j++;
                     }

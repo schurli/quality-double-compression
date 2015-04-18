@@ -301,8 +301,6 @@ encode_image(encodeFunction enc, decodeFunction dec, char* ext, char* in, char* 
   // Decode and store result as bmp.
   (*dec)(out_jpeg, out_bmp);
   strcpy(out, out_bmp);
-  // Delete bmp
-  unlink(out_bmp);
 
   // Delete jpeg
   // unlink(out_jpeg);
