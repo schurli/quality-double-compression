@@ -8,10 +8,12 @@ PS Multimedia Datenformate
 * JPEGv9: http://www.infai.org/jpeg/
 * Image Quality Assessment: http://tdistler.com/iqa/
 * Visual Quality Index Implementations: http://wavelab.at/sources/VQI/?hc_location=ufi
+* Video Quality Metrics: https://github.com/aizvorski/video-quality
 
 ## Dependencies:
 
 * For building 3rd party libraries: `sudo apt-get install libbsd-dev cmake libfreeimage-dev`
+* `apt-get install python python-scipy`
 * For documentation: `sudo apt-get install doxygen`
 
 ## Building:
@@ -46,6 +48,8 @@ Use `make doc` to view documentation and `make doc-clean` to clean the generated
     cd lib/vqi-3.3.0/
     make all
 
+* VQM: Video Quality Metrics, Python
+
 
 ## De-/encoding:
 
@@ -74,6 +78,8 @@ Use `make doc` to view documentation and `make doc-clean` to clean the generated
     * `./imagemetric dl/[metric.dl] [original] [compare]`
     * Available metrics are: `ess.dl,leg.dl,lfbvs.dl,lss.dl,mse.dl,nice.dl,psnr.dl,psnry.dl,ssim.dl,sun10a.dl,yao09a.dl`
 
+* FQM
+    * `python runfiv [origial] [compare]`
 
 ## Development
 

@@ -66,6 +66,38 @@ vqi (char *metric, char *original, char *compare)
 }
 
 float
+vqm (char *original, char *compare)
+{
+  char command[1000];
+  // execute VQI metric
+  char *execpath = "python lib/vqm/runvif.py %s %s > /tmp/out.txt";
+  sprintf(command, execpath, original, compare);
+
+  FILE *fp;
+  char buf[128];
+  float value_float = 0.0;
+  system(command);
+  int i = 0;
+  if ((fp = fopen("/tmp/out.txt", "r")) == NULL)
+    {
+      printf("Error opening file!\n");
+      return -1;
+    }
+
+  while (fgets(buf, 1024, fp) != NULL)
+    {
+      striptrail(buf);
+      value_float = atof(buf);
+      break;
+    }
+
+  fclose(fp);
+  remove("/tmp/out.txt");
+
+  return value_float;
+}
+
+float
 apply_metric (char *metric, char *original, char *compare)
 {
 
@@ -73,6 +105,10 @@ apply_metric (char *metric, char *original, char *compare)
     {
       return vqi (metric, original, compare);
     }
+  else if (strcmp(metric,"vif") == 0)
+   {
+     return vqm (original, compare);
+   }
   else if (strcmp(metric,"ms-ssim") == 0)
     {
       struct bmp orig_bmp, comp_bmp;

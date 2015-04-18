@@ -18,6 +18,8 @@ char leg_a[1023];
 char leg_b[1023];
 char msssim_a[1023];
 char msssim_b[1023];
+char vif_a[1023];
+char vif_b[1023];
 char sfloat[63];
 
 void
@@ -35,6 +37,12 @@ wmetric (int pass, char *current_file, char *encoded_bmp)
     strcat(msssim_b, sfloat);
   else
     strcat(msssim_a, sfloat);
+  // VIF
+  sprintf(sfloat,"%f,",apply_metric("vif", current_file, encoded_bmp));
+  if(pass)
+    strcat(vif_b, sfloat);
+  else
+    strcat(vif_a, sfloat);
 }
 
 int
@@ -79,6 +87,10 @@ process_dir(char * input_dir, char *output_dir1, char *output_dir2, float *bpps1
               strcat(msssim_a, ",");
               strcpy(msssim_b, current_file);
               strcat(msssim_b, ",");
+              strcpy(leg_a, current_file);
+              strcat(vif_a, ",");
+              strcpy(vif_b, current_file);
+              strcat(vif_b, ",");
               int i = 0;
               while (i < bppsc1)
                 {
@@ -109,6 +121,12 @@ process_dir(char * input_dir, char *output_dir1, char *output_dir2, float *bpps1
               fclose(out);
               out = fopen("out/ms-ssim_b.csv", "a");
               fprintf(out, "%s\n", msssim_b);
+              fclose(out);
+              out = fopen("out/vif_a.csv", "a");
+              fprintf(out, "%s\n", vif_a);
+              fclose(out);
+              out = fopen("out/vif_b.csv", "a");
+              fprintf(out, "%s\n", vif_b);
               fclose(out);
               // next file
               child = child->fts_link;
