@@ -114,7 +114,7 @@ jpeg_xr_enc(char* in, char* out, int quality)
    * q = (double) quality / 100
    */
   sprintf(command, path_jpegxr_enc, in, out, ((double) quality / 100));
-  // printf("exec: %s\n", command);
+  printf("exec: %s\n", command);
   return system(command);
 }
 
@@ -247,12 +247,15 @@ encode_image(encodeFunction enc, decodeFunction dec, char* ext, char* in, char* 
 {
   char out_jpeg[1000];
   char out_bmp[1000];
+  char bpp_string[50];
 
   // create jpeg file path
   strcpy(out_jpeg, outdir);
   strcat(out_jpeg, basename(in));
   // remove .bmp
   out_jpeg[(strlen(out_jpeg) - 4)] = '\0';
+  sprintf(bpp_string, "_%f_", bpp);
+  strcat(out_jpeg, bpp_string);
   strcat(out_jpeg, ".");
   strcat(out_jpeg, ext);
   // derive bmp path from jpeg path
@@ -275,7 +278,7 @@ encode_image(encodeFunction enc, decodeFunction dec, char* ext, char* in, char* 
     {
       (*enc)(in, out_jpeg, (int) quality);
       size = filesize(out_jpeg);
-      // printf("Type %s (size: %d, target size: %d, quality: %f)\n", ext, size, des_size, quality);
+      printf("step: Type %s (size: %d, target size: %d, quality: %f)\n", ext, size, des_size, quality);
       step /= 2.0;
       if (size < des_size)
         { // increase quality
@@ -300,7 +303,7 @@ encode_image(encodeFunction enc, decodeFunction dec, char* ext, char* in, char* 
   strcpy(out, out_bmp);
 
   // Delete jpeg
-  unlink(out_jpeg);
+  //unlink(out_jpeg);
 
   printf("Type %s (size: %d, target size: %d, quality: %f)\n", ext, size, des_size, quality);
   return 0;

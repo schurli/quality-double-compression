@@ -87,7 +87,7 @@ process_dir(char * input_dir, char *output_dir1, char *output_dir2, float *bpps1
               strcat(msssim_a, ",");
               strcpy(msssim_b, current_file);
               strcat(msssim_b, ",");
-              strcpy(leg_a, current_file);
+              strcpy(vif_a, current_file);
               strcat(vif_a, ",");
               strcpy(vif_b, current_file);
               strcat(vif_b, ",");
