@@ -11,7 +11,7 @@
  * 2nd wildcard is output file (j2k)
  * 3rd wildcard is quality setting e.g. 30,40,50. Must be increasing 1st < 2nd < 3rd layer.
  */
-char path_jpeg2000_enc[] = "./lib/j2k-2.1.0/bin/opj_compress -i %s -o %s -q %s";
+char path_jpeg2000_enc[] = "./lib/j2k-2.1.0/bin/opj_compress -i %s -o %s -q %s > /dev/null";
 
 /**
  * Command to decompress JPEG2000
@@ -26,7 +26,7 @@ char path_jpeg2000_dec[] = "./lib/j2k-2.1.0/bin/opj_decompress -i %s -o %s";
  * 2nd wildcard is output file (jxr)
  * 3rd wildcard is quality setting 0.0 - 1.0
  */
-char path_jpegxr_enc[] = "./lib/jxr-1.1/JxrEncApp -i %s -o %s -q %f";
+char path_jpegxr_enc[] = "./lib/jxr-1.1/JxrEncApp -i %s -o %s -q %d  > /dev/null";
 
 /**
  * Command to decompress JPEG XR
@@ -41,7 +41,7 @@ char path_jpegxr_dec[] = "./lib/jxr-1.1/JxrDecApp -i %s -o %s";
  * 2nd wildcard is output file (jpg)
  * 3rd wildcard is input file (bmp)
  */
-char path_jpeg_enc[] = "./lib/jpg-9a/cjpeg -quality %d -outfile %s %s";
+char path_jpeg_enc[] = "./lib/jpg-9a/cjpeg -quality %d -outfile %s %s  > /dev/null";
 
 
 /**
@@ -56,13 +56,30 @@ char path_jpeg_dec[] = "./lib/jpg-9a/djpeg -bmp -outfile %s %s";
  */
 char output_dir[] = "out/";
 
+/**
+ * Silent execution of command.
+ * @return int exit status.
+ */
+int
+execute(char* cmd)
+{
+  // printf("exec: %s\n", cmd);
+  FILE *pipe;
+  char str[100];
+  char command[1000];
+  strcpy(command, cmd);
+  strcat(command, " 2>&1");
+  pipe = popen(command, "r");
+  fgets(str, 100, pipe);
+  return pclose(pipe);
+}
 
 /**
  * JPEG2000: Function to encode a bmp file to a j2k file with configurable quality.
  * @param char* in Path to input bmp file
  * @param char* out Path to output j2k file
  * @param int quality Something between 1 and 100.
- * @return int exist status of encoding process.
+ * @return int exit status of encoding process.
  */
 int
 jpeg_2000_enc(char* in, char* out, int quality)
@@ -77,10 +94,8 @@ jpeg_2000_enc(char* in, char* out, int quality)
    * c = 15 - 100, quality * 85 / 100 + 15
    */
   sprintf(quality2000, "%d,%d,%d", (quality * 75 / 100 + 5), (quality * 80 / 100 + 10), (quality * 85 / 100 + 15));
-
   sprintf(command, path_jpeg2000_enc, in, out, quality2000);
-  // printf("exec: %s\n", command);
-  return system(command);
+  return execute(command);
 }
 
 /**
@@ -94,8 +109,7 @@ jpeg_2000_dec(char* in, char* out)
 {
   char command[1000];
   sprintf(command, path_jpeg2000_dec, in, out);
-  // printf("exec: %s\n", command);
-  return system(command);
+  return execute(command);
 }
 
 /**
@@ -103,19 +117,18 @@ jpeg_2000_dec(char* in, char* out)
  * @param char* in Path to input bmp file
  * @param char* out Path to output jxr file
  * @param int quality Something between 1 and 100.
- * @return int exist status of encoding process.
+ * @return int exit status of encoding process.
  */
 int
 jpeg_xr_enc(char* in, char* out, int quality)
 {
   char command[1000];
   /**
-   * Generate quality setting 0.0-1.0
+   * Generate quality setting 0.0-1.0 or 1-255
    * q = (double) quality / 100
    */
-  sprintf(command, path_jpegxr_enc, in, out, ((double) quality / 100));
-  // printf("exec: %s\n", command);
-  return system(command);
+  sprintf(command, path_jpegxr_enc, in, out, (256 - ((quality * 255) / 100)));
+  return execute(command);
 }
 
 /**
@@ -129,8 +142,7 @@ jpeg_xr_dec(char* in, char* out)
 {
   char command[1000];
   sprintf(command, path_jpegxr_dec, in, out);
-  // printf("exec: %s\n", command);
-  return system(command);
+  return execute(command);
 }
 
 /**
@@ -138,16 +150,14 @@ jpeg_xr_dec(char* in, char* out)
  * @param char* in Path to input bmp file
  * @param char* out Path to output jpg file
  * @param int quality Something between 1 and 100.
- * @return int exist status of encoding process.
+ * @return int exit status of encoding process.
  */
 int
 jpeg_enc(char* in, char* out, int quality)
 {
   char command[1000];
-
   sprintf(command, path_jpeg_enc, quality, out, in);
-  // printf("exec: %s\n", command);
-  return system(command);
+  return execute(command);
 }
 
 /**
@@ -161,8 +171,7 @@ jpeg_dec(char* in, char* out)
 {
   char command[1000];
   sprintf(command, path_jpeg_dec, out, in);
-  // printf("exec: %s\n", command);
-  return system(command);
+  return execute(command);
 }
 
 /**
@@ -247,19 +256,19 @@ encode_image(encodeFunction enc, decodeFunction dec, char* ext, char* in, char* 
 {
   char out_jpeg[1000];
   char out_bmp[1000];
-  // char bpp_string[50];
+  char bpp_string[50];
 
   // create jpeg file path
   strcpy(out_jpeg, outdir);
   strcat(out_jpeg, basename(in));
   // remove .bmp
   out_jpeg[(strlen(out_jpeg) - 4)] = '\0';
-  // sprintf(bpp_string, "_%f_", bpp);
-  // strcat(out_jpeg, bpp_string);
+  sprintf(bpp_string, "-%f", bpp);
+  strcat(out_jpeg, bpp_string);
   strcat(out_jpeg, ".");
   strcat(out_jpeg, ext);
   // derive bmp path from jpeg path
-  sprintf(out_bmp, "%s-%f%s", out_jpeg, bpp, ".bmp");
+  sprintf(out_bmp, "%s%s", out_jpeg, ".bmp");
 
   // Get total number of pixels in image
   unsigned int pixels = get_number_of_pixels_bmp(in);
@@ -271,10 +280,11 @@ encode_image(encodeFunction enc, decodeFunction dec, char* ext, char* in, char* 
   // Quality ranges from 0 to 100 and 2 raised by the pow of 6 is 64. Quality is an integer, thus 6 steps in
   // the binary search is the max number of steps to find the perfect setting to get the desired bpp.
   double quality = 50.0;
+  double qual_last_inc = 0;
   double step = 50.0;
   int size = 0;
   int i;
-  for (i = 0; i < 6; i++)
+  for (i = 0; i < 7; i++)
     {
       (*enc)(in, out_jpeg, (int) quality);
       size = filesize(out_jpeg);
@@ -282,6 +292,7 @@ encode_image(encodeFunction enc, decodeFunction dec, char* ext, char* in, char* 
       step /= 2.0;
       if (size < des_size)
         { // increase quality
+          qual_last_inc = quality;
           quality += step;
         }
       else
@@ -297,6 +308,12 @@ encode_image(encodeFunction enc, decodeFunction dec, char* ext, char* in, char* 
           quality = 100.0;
         }
     }
+  if (size > des_size)
+    {
+      (*enc)(in, out_jpeg, (int) qual_last_inc);
+      size = filesize(out_jpeg);
+      quality = qual_last_inc;
+    }
 
   // Decode and store result as bmp.
   (*dec)(out_jpeg, out_bmp);
@@ -305,7 +322,8 @@ encode_image(encodeFunction enc, decodeFunction dec, char* ext, char* in, char* 
   // Delete jpeg
   // unlink(out_jpeg);
 
-  printf("Type %s (size: %d, target size: %d, quality: %f)\n", ext, size, des_size, quality);
+  // printf("<img src='%s.png'><br/>%s (%d/%d)<br/>%f", out_jpeg, ext, size, des_size, quality);
+  printf("%s (%d/%d), %f\n", ext, size, des_size, quality);
   return 0;
 }
 

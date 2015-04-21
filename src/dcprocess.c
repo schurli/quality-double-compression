@@ -72,7 +72,7 @@ process_dir(char * input_dir, char *output_dir1, char *output_dir2, float *bpps1
 
           while (NULL != child)
             {
-              printf("%s%s\n", child->fts_path, child->fts_name);
+              // printf("%s%s\n", child->fts_path, child->fts_name);
               char current_file[255];
               char encoded_bmp[255];
               strcpy (current_file, child->fts_path);
@@ -94,9 +94,11 @@ process_dir(char * input_dir, char *output_dir1, char *output_dir2, float *bpps1
               int i = 0;
               while (i < bppsc1)
                 {
+                  //printf("<tr><td>%f</td>", bpps1[i]);
                   int j = 0;
                   while (j < 3)
                     {
+                      //printf("<td>");
                       code_image (coders[j], current_file, output_dir1, encoded_bmp, bpps1[i]);
                       wmetric(0, current_file, encoded_bmp);
                       if (bppsc2 != 0)
@@ -107,7 +109,9 @@ process_dir(char * input_dir, char *output_dir1, char *output_dir2, float *bpps1
                           unlink(encoded_bmp);
                         }
                       j++;
+                      //printf("</td>");
                     }
+                  //printf("</tr>\n");
                   i++;
                 }
 
@@ -155,7 +159,6 @@ main(int argc, char* argv[])
 {
   char *input_dir = NULL;
   char *output_dir = NULL;
-  char *metric = NULL;
   float first_pass[50] = { 0 };
   float second_pass[50] = { 0 };
 
@@ -169,7 +172,7 @@ main(int argc, char* argv[])
   opterr = 0;
   int i;
   char *token;
-  while ((c = getopt (argc, argv, "i:o:m:a:b:")) != -1)
+  while ((c = getopt (argc, argv, "i:o:a:b:")) != -1)
     switch (c)
       {
       case 'i':
@@ -177,9 +180,6 @@ main(int argc, char* argv[])
         break;
       case 'o':
         output_dir = optarg;
-        break;
-      case 'm':
-        metric = optarg;
         break;
       case 'a':
         i = 0;
@@ -226,7 +226,7 @@ main(int argc, char* argv[])
       return 1;
     }
 
-  if (passes1 == 0 || input_dir == NULL || output_dir == NULL || metric == NULL)
+  if (passes1 == 0 || input_dir == NULL || output_dir == NULL)
     {
       fprintf (stderr, "./dcprocess -i [input-db] -o [output-dir] -a \"0.1,0.2,0.3\" -b \"0.075,0.175,0.275\"\n");
       return 1;
