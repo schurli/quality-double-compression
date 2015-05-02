@@ -78,7 +78,7 @@ execute(char* cmd)
  * JPEG2000: Function to encode a bmp file to a j2k file with configurable quality.
  * @param char* in Path to input bmp file
  * @param char* out Path to output j2k file
- * @param int quality Something between 1 and 100.
+ * @param int quality Something between 0 and 256.
  * @return int exit status of encoding process.
  */
 int
@@ -88,12 +88,35 @@ jpeg_2000_enc(char* in, char* out, int quality)
   char quality2000[15];
 
   /**
-   * Generate quality setting "a,b,c"
-   * a = 5 - 80, quality * 75 / 100 + 5
-   * b = 10 - 90, quality * 80 / 100 + 10
-   * c = 15 - 100, quality * 85 / 100 + 15
+   * Generate compression ratio setting "a,b,c" e.g. 20,10,1
+   * 1,1,1 would mean 100% / 255 quality
+   * a = 1 - 128,
+   * b = 1 - 64,
+   * c = 1 - 32,
    */
-  sprintf(quality2000, "%d,%d,%d", (quality * 75 / 100 + 5), (quality * 80 / 100 + 10), (quality * 85 / 100 + 15));
+  /*quality = 256 - quality;
+  int r = (8*quality*quality) / (256);
+
+  int a = 4 * r; //(quality+7)*8;
+  int b = 3 * r; //(quality+6)*7;
+  int c = 2 * r; //(quality+5)*6;
+  int d = 1;
+
+  printf("a:%d,b:%d,c:%d,d:%d\n", a, b, c, d);
+
+  sprintf(quality2000, "%d,%d,%d,%d", a, b, c, d);*/
+
+  /**
+     * Generate quality setting "a,b,c"
+     * a = 5 - 80, quality * 75 / 100 + 5
+     * b = 10 - 90, quality * 80 / 100 + 10
+     * c = 15 - 100, quality * 85 / 100 + 15
+     */
+  int a = (quality *quality*quality * 25 / 255 / 255 / 255 + 5);
+  int b = (quality *quality* 50 / 255/255 + 10); // (8+quality%2));
+  int c = (quality * 55 / 255 + 15);
+
+  sprintf(quality2000, "%d,%d,%d", a, b, c);
   sprintf(command, path_jpeg2000_enc, in, out, quality2000);
   return execute(command);
 }
@@ -116,7 +139,7 @@ jpeg_2000_dec(char* in, char* out)
  * JPEGXR: Function to encode a bmp file to a jxr file with configurable quality.
  * @param char* in Path to input bmp file
  * @param char* out Path to output jxr file
- * @param int quality Something between 1 and 100.
+ * @param int quality Something between 0 and 256.
  * @return int exit status of encoding process.
  */
 int
@@ -125,9 +148,9 @@ jpeg_xr_enc(char* in, char* out, int quality)
   char command[1000];
   /**
    * Generate quality setting 0.0-1.0 or 1-255
-   * q = (double) quality / 100
+   * q = 1 - 255, 256 - quality
    */
-  sprintf(command, path_jpegxr_enc, in, out, (256 - ((quality * 255) / 100)));
+  sprintf(command, path_jpegxr_enc, in, out, (256 - quality));
   return execute(command);
 }
 
@@ -149,14 +172,14 @@ jpeg_xr_dec(char* in, char* out)
  * JPEGv9: Function to encode a bmp file to a jpg file with configurable quality.
  * @param char* in Path to input bmp file
  * @param char* out Path to output jpg file
- * @param int quality Something between 1 and 100.
+ * @param int quality Something between 1 and 256.
  * @return int exit status of encoding process.
  */
 int
 jpeg_enc(char* in, char* out, int quality)
 {
   char command[1000];
-  sprintf(command, path_jpeg_enc, quality, out, in);
+  sprintf(command, path_jpeg_enc, ((quality * 100) / 255), out, in);
   return execute(command);
 }
 
@@ -277,20 +300,31 @@ encode_image(encodeFunction enc, decodeFunction dec, char* ext, char* in, char* 
   unsigned int des_size = (int) ((double) pixels * bpp);
 
   // Perform a binary search to find optimal quality setting.
-  // Quality ranges from 0 to 100 and 2 raised by the pow of 6 is 64. Quality is an integer, thus 6 steps in
+  // Quality ranges from 1 to 255 and 2 raised by the pow of 6 is 64. Quality is an integer, thus 6 steps in
   // the binary search is the max number of steps to find the perfect setting to get the desired bpp.
-  double quality = 50.0;
-  double qual_last_inc = 0;
-  double step = 50.0;
+  int quality = 128;
+  int qual_last_inc = 1;
+  int step = quality;
   int size = 0;
   int i;
-  for (i = 0; i < 7; i++)
+  /*for (i = 1; i < 256; i++)
+    {
+      (*enc)(in, out_jpeg, i);
+      size = filesize(out_jpeg);
+      printf("%d\n",size);
+    }*/
+  for (i = 0; i < 8; i++)
     {
       (*enc)(in, out_jpeg, (int) quality);
       size = filesize(out_jpeg);
-      // printf("step: Type %s (size: %d, target size: %d, quality: %f)\n", ext, size, des_size, quality);
-      step /= 2.0;
-      if (size < des_size)
+      //printf("step: %d Type %s (size: %d, target size: %d, quality: %d)\n", step, ext, size, des_size, quality);
+      //printf("%d,%s,%d,%d,%d\n", step, ext, size, des_size, quality);
+      step /= 2;
+      if (size == des_size)
+        { // done
+          break;
+        }
+      else if(size < des_size)
         { // increase quality
           qual_last_inc = quality;
           quality += step;
@@ -299,13 +333,15 @@ encode_image(encodeFunction enc, decodeFunction dec, char* ext, char* in, char* 
         { // decrease quality
           quality -= step;
         }
-      if (quality <= 0.0)
+      // check lower bound
+      if (quality <= 1)
         {
-          quality = 1.0;
+          quality = 1;
         }
-      if (quality >= 100.0)
+      // check upper bound
+      if (quality >= 255)
         {
-          quality = 100.0;
+          quality = 255;
         }
     }
   if (size > des_size)
@@ -323,7 +359,8 @@ encode_image(encodeFunction enc, decodeFunction dec, char* ext, char* in, char* 
   // unlink(out_jpeg);
 
   // printf("<img src='%s.png'><br/>%s (%d/%d)<br/>%f", out_jpeg, ext, size, des_size, quality);
-  printf("%s (%d/%d), %f\n", ext, size, des_size, quality);
+  // printf("%s (%d/%d), %f\n", ext, size, des_size, quality);
+  //printf("%d,%d,%d,", size, des_size, quality);
   return 0;
 }
 

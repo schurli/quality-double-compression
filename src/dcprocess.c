@@ -100,7 +100,7 @@ process_dir(char * input_dir, char *output_dir1, char *output_dir2, float *bpps1
                     {
                       //printf("<td>");
                       code_image (coders[j], current_file, output_dir1, encoded_bmp, bpps1[i]);
-                      wmetric(0, current_file, encoded_bmp);
+                      //wmetric(0, current_file, encoded_bmp);
                       if (bppsc2 != 0)
                         {
                           code_image (coders[j], encoded_bmp, output_dir2, encoded_bmp, bpps2[i]);
@@ -112,6 +112,7 @@ process_dir(char * input_dir, char *output_dir1, char *output_dir2, float *bpps1
                       //printf("</td>");
                     }
                   //printf("</tr>\n");
+                  printf("\n");
                   i++;
                 }
 
@@ -172,7 +173,7 @@ main(int argc, char* argv[])
   opterr = 0;
   int i;
   char *token;
-  while ((c = getopt (argc, argv, "i:o:a:b:")) != -1)
+  while ((c = getopt (argc, argv, "i:o:a:")) != -1)
     switch (c)
       {
       case 'i':
@@ -197,34 +198,12 @@ main(int argc, char* argv[])
           }
         passes1 = i;
         break;
-      case 'b':
-        i = 0;
-        token = strtok(optarg, ",");
-        while (token)
-          {
-            if (i > 49)
-              {
-                fprintf (stderr, "Too many rates.\n");
-                return 1;
-              }
-            second_pass[i] = atof(token);
-            token = strtok(NULL, ",");
-            i++;
-          }
-        passes2 = i;
-        break;
       case '?':
         fprintf (stderr, "./dcprocess -i [input-db] -o [output-dir] -a \"0.1,0.2,0.3\" -b \"0.075,0.175,0.275\"\n");
         return 1;
       default:
         abort ();
       }
-
-  if (passes2 != 0 && passes1 != passes2)
-    {
-      fprintf (stderr, "Number of rates for first and second pass must be the same.\n");
-      return 1;
-    }
 
   if (passes1 == 0 || input_dir == NULL || output_dir == NULL)
     {
