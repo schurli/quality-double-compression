@@ -168,7 +168,7 @@ main(int argc, char* argv[])
 {
   char *input_dir = NULL;
   char *output_dir = NULL;
-  float first_pass[50] = { 0 };
+  float first_pass[500] = { 0 };
 
   int first_passc = 0;
 
@@ -193,7 +193,7 @@ main(int argc, char* argv[])
         token = strtok(optarg, ",");
         while (token)
           {
-            if (i > 49)
+            if (i > 499)
               {
                 fprintf (stderr, "Too many rates.\n");
                 return 1;
