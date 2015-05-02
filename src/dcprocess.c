@@ -13,10 +13,11 @@
 
 int compare (const FTSENT**, const FTSENT**);
 
-
-char leg[32767];
-char msssim[32767];
-char vif[32767];
+// list of valid coders to use
+char *coders[] = { "jpg","j2k","jxr" };
+// list of valid metrics to use
+char *metrics[] = { "leg","nice","mse","psnr","vif","ms-ssim", NULL };
+char metric_output[6][32767];
 char sfloat[63];
 
 /**
@@ -27,17 +28,49 @@ char sfloat[63];
 void
 wmetric (char *current_file, char *encoded_bmp)
 {
-  // LEG
-  sprintf(sfloat,"%f,",apply_metric("leg", current_file, encoded_bmp));
-  strcat(leg, sfloat);
+  int i = 0;
+  while (metrics[i] != NULL)
+    {
+      sprintf(sfloat,"%f,",apply_metric(metrics[i], current_file, encoded_bmp));
+      strcat(metric_output[i], sfloat);
+      i++;
+    }
+}
 
-  // MS-SSIM
-  sprintf(sfloat,"%f,",apply_metric("ms-ssim", current_file, encoded_bmp));
-  strcat(msssim, sfloat);
+/**
+ * Start a new line in all metrics output files.
+ * @param char * current_file File name of the currently analyzed reference image.
+ */
+void
+wstart (char *current_file)
+{
+  int i = 0;
+  while (metrics[i] != NULL)
+    {
+      strcpy(metric_output[i], current_file);
+      strcat(metric_output[i], ",");
+      i++;
+    }
+}
 
-  // VIF
-  sprintf(sfloat,"%f,",apply_metric("vif", current_file, encoded_bmp));
-  strcat(vif, sfloat);
+/**
+ * Write metrics result buffer to file.
+ */
+void
+wend (void)
+{
+  FILE *out;
+  char *format = "out/%s.csv";
+  int i = 0;
+  while (metrics[i] != NULL)
+    {
+      char output_file[512];
+      sprintf(output_file, format, metrics[i]);
+      out = fopen(output_file, "a");
+      fprintf(out, "%s\n", metric_output[i]); // append new line
+      fclose(out);
+      i++;
+    }
 }
 
 /**
@@ -57,10 +90,6 @@ process_dir(char * input_dir, char *output_dir1, char *output_dir2, float *bpps,
   FTSENT* parent = NULL;
 
   char *indir[] = { input_dir, NULL };
-
-  // list of valid coders to use
-  char *coders[] = { "jpg","j2k","jxr" };
-  FILE *out;
 
   file_system = fts_open(indir,FTS_COMFOLLOW | FTS_NOCHDIR, &compare);
 
@@ -86,12 +115,7 @@ process_dir(char * input_dir, char *output_dir1, char *output_dir2, float *bpps,
               strcat (current_file, child->fts_name);
 
               // start new line and write current file
-              strcpy(leg, current_file);
-              strcat(leg, ",");
-              strcpy(msssim, current_file);
-              strcat(msssim, ",");
-              strcpy(vif, current_file);
-              strcat(vif, ",");
+              wstart (current_file);
 
               // create jpegs with 50%, 75%, 85%
               char source_file[4][255];
@@ -133,16 +157,7 @@ process_dir(char * input_dir, char *output_dir1, char *output_dir2, float *bpps,
                   i++;
                 }
 
-              // write new line to file
-              out = fopen("out/leg.csv", "a");
-              fprintf(out, "%s\n", leg);
-              fclose(out);
-              out = fopen("out/ms-ssim.csv", "a");
-              fprintf(out, "%s\n", msssim);
-              fclose(out);
-              out = fopen("out/vif.csv", "a");
-              fprintf(out, "%s\n", vif);
-              fclose(out);
+              wend ();
               // next file
               child = child->fts_link;
             }

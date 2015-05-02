@@ -101,7 +101,8 @@ float
 apply_metric (char *metric, char *original, char *compare)
 {
 
-  if (strcmp(metric,"leg") == 0 || strcmp(metric,"nice") == 0)
+  if (strcmp(metric,"leg") == 0 || strcmp(metric,"nice") == 0 || strcmp(metric,"mse") == 0 ||
+        strcmp(metric,"psnr") == 0)
     {
       return vqi (metric, original, compare);
     }
