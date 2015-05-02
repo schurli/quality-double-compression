@@ -14,39 +14,43 @@
 int compare (const FTSENT**, const FTSENT**);
 
 
-char leg_a[1023];
-char leg_b[1023];
-char msssim_a[1023];
-char msssim_b[1023];
-char vif_a[1023];
-char vif_b[1023];
+char leg[2047];
+char msssim[2047];
+char vif[2047];
 char sfloat[63];
 
+/**
+ * Calculate and write metric log.
+ * @param char * current_file Path to reference file
+ * @param char * encoded_bmp Path to calculated file
+ */
 void
-wmetric (int pass, char *current_file, char *encoded_bmp)
+wmetric (char *current_file, char *encoded_bmp)
 {
   // LEG
   sprintf(sfloat,"%f,",apply_metric("leg", current_file, encoded_bmp));
-  if(pass)
-    strcat(leg_b, sfloat);
-  else
-    strcat(leg_a, sfloat);
+  strcat(leg, sfloat);
+
   // MS-SSIM
   sprintf(sfloat,"%f,",apply_metric("ms-ssim", current_file, encoded_bmp));
-  if(pass)
-    strcat(msssim_b, sfloat);
-  else
-    strcat(msssim_a, sfloat);
+  strcat(msssim, sfloat);
+
   // VIF
   sprintf(sfloat,"%f,",apply_metric("vif", current_file, encoded_bmp));
-  if(pass)
-    strcat(vif_b, sfloat);
-  else
-    strcat(vif_a, sfloat);
+  strcat(vif, sfloat);
 }
 
+/**
+ * Process a directory filled with reference images.
+ * @param char * input_dir Path to directory to process
+ * @param char * output_dir1 Path for first encoding pass output
+ * @param char * output_dir2 Path for second encoding pass output, the calculated and compared files.
+ * @param float * bpps List of bpp values
+ * @param int bppsc Length of bpp list
+ * @return int Success
+ */
 int
-process_dir(char * input_dir, char *output_dir1, char *output_dir2, float *bpps1, float *bpps2, int bppsc1, int bppsc2)
+process_dir(char * input_dir, char *output_dir1, char *output_dir2, float *bpps, int bppsc)
 {
   FTS* file_system = NULL;
   FTSENT* child = NULL;
@@ -54,6 +58,7 @@ process_dir(char * input_dir, char *output_dir1, char *output_dir2, float *bpps1
 
   char *indir[] = { input_dir, NULL };
 
+  // list of valid coders to use
   char *coders[] = { "jpg","j2k","jxr" };
   FILE *out;
 
@@ -70,44 +75,56 @@ process_dir(char * input_dir, char *output_dir1, char *output_dir2, float *bpps1
               perror("fts_children");
             }
 
+          // process one reference image
           while (NULL != child)
             {
-              // printf("%s%s\n", child->fts_path, child->fts_name);
+              printf("%s%s\n", child->fts_path, child->fts_name);
               char current_file[255];
               char encoded_bmp[255];
+
               strcpy (current_file, child->fts_path);
               strcat (current_file, child->fts_name);
 
               // start new line and write current file
-              strcpy(leg_a, current_file);
-              strcat(leg_a, ",");
-              strcpy(leg_b, current_file);
-              strcat(leg_b, ",");
-              strcpy(msssim_a, current_file);
-              strcat(msssim_a, ",");
-              strcpy(msssim_b, current_file);
-              strcat(msssim_b, ",");
-              strcpy(vif_a, current_file);
-              strcat(vif_a, ",");
-              strcpy(vif_b, current_file);
-              strcat(vif_b, ",");
+              strcpy(leg, current_file);
+              strcat(leg, ",");
+              strcpy(msssim, current_file);
+              strcat(msssim, ",");
+              strcpy(vif, current_file);
+              strcat(vif, ",");
+
+              // create jpegs with 50%, 75%, 85%
+              char source_file[4][255];
+              strcpy(source_file[0], current_file);
+              code_jpeg(current_file, output_dir1, source_file[1], 50);
+              code_jpeg(current_file, output_dir1, source_file[2], 75);
+              code_jpeg(current_file, output_dir1, source_file[3], 85);
+
+              // process each bpp setting
               int i = 0;
-              while (i < bppsc1)
+              while (i < bppsc)
                 {
-                  //printf("<tr><td>%f</td>", bpps1[i]);
+                  //printf("<tr><td>%f</td>", bpps[i]);
+                  // apply each coder
                   int j = 0;
                   while (j < 3)
                     {
-                      //printf("<td>");
-                      code_image (coders[j], current_file, output_dir1, encoded_bmp, bpps1[i]);
-                      //wmetric(0, current_file, encoded_bmp);
-                      if (bppsc2 != 0)
+                      // encode each probably previously encoded file in source file list
+                      int si = 0;
+                      while (si < 4)
                         {
-                          code_image (coders[j], encoded_bmp, output_dir2, encoded_bmp, bpps2[i]);
-                          wmetric(1, current_file, encoded_bmp);
-                          // unlink bmp
-                          unlink(encoded_bmp);
+                          code_image (coders[j], source_file[si], output_dir2, encoded_bmp, bpps[i]);
+                          // compare with the reference image
+                          wmetric (current_file, encoded_bmp);
+                          // unlink(encoded_bmp); // remove encoded bmp
+                          /*if (si > 0)
+                            {
+                              unlink(source_file[si]); // remove first pass encoded bmp
+                            }*/
+                          si++;
                         }
+                      //printf("<td>");
+
                       j++;
                       //printf("</td>");
                     }
@@ -117,23 +134,14 @@ process_dir(char * input_dir, char *output_dir1, char *output_dir2, float *bpps1
                 }
 
               // write new line to file
-              out = fopen("out/leg_a.csv", "a");
-              fprintf(out, "%s\n", leg_a);
+              out = fopen("out/leg.csv", "a");
+              fprintf(out, "%s\n", leg);
               fclose(out);
-              out = fopen("out/leg_b.csv", "a");
-              fprintf(out, "%s\n", leg_b);
+              out = fopen("out/ms-ssim.csv", "a");
+              fprintf(out, "%s\n", msssim);
               fclose(out);
-              out = fopen("out/ms-ssim_a.csv", "a");
-              fprintf(out, "%s\n", msssim_a);
-              fclose(out);
-              out = fopen("out/ms-ssim_b.csv", "a");
-              fprintf(out, "%s\n", msssim_b);
-              fclose(out);
-              out = fopen("out/vif_a.csv", "a");
-              fprintf(out, "%s\n", vif_a);
-              fclose(out);
-              out = fopen("out/vif_b.csv", "a");
-              fprintf(out, "%s\n", vif_b);
+              out = fopen("out/vif.csv", "a");
+              fprintf(out, "%s\n", vif);
               fclose(out);
               // next file
               child = child->fts_link;
@@ -161,10 +169,8 @@ main(int argc, char* argv[])
   char *input_dir = NULL;
   char *output_dir = NULL;
   float first_pass[50] = { 0 };
-  float second_pass[50] = { 0 };
 
-  int passes1 = 0;
-  int passes2 = 0;
+  int first_passc = 0;
 
   int index;
   int c;
@@ -196,18 +202,18 @@ main(int argc, char* argv[])
             token = strtok(NULL, ",");
             i++;
           }
-        passes1 = i;
+        first_passc = i;
         break;
       case '?':
-        fprintf (stderr, "./dcprocess -i [input-db] -o [output-dir] -a \"0.1,0.2,0.3\" -b \"0.075,0.175,0.275\"\n");
+        fprintf (stderr, "./dcprocess -i [input-db] -o [output-dir] -a \"0.1,0.2,0.3\"\n");
         return 1;
       default:
         abort ();
       }
 
-  if (passes1 == 0 || input_dir == NULL || output_dir == NULL)
+  if (first_passc == 0 || input_dir == NULL || output_dir == NULL)
     {
-      fprintf (stderr, "./dcprocess -i [input-db] -o [output-dir] -a \"0.1,0.2,0.3\" -b \"0.075,0.175,0.275\"\n");
+      fprintf (stderr, "./dcprocess -i [input-db] -o [output-dir] -a \"0.1,0.2,0.3\"\n");
       return 1;
     }
 
@@ -223,5 +229,5 @@ main(int argc, char* argv[])
 
   int error = 0;
 
-  return process_dir(input_dir, output_pass_1, output_pass_2, first_pass, second_pass, passes1, passes2);
+  return process_dir(input_dir, output_pass_1, output_pass_2, first_pass, first_passc);
 }

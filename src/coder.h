@@ -50,3 +50,14 @@ get_dim(char* filename);
  */
 int
 code_image (char* ext, char* in, char* outdir, char* out, double bpp);
+
+/**
+ * Create a BMP with the quality of a JPEG image with specified quality setting.
+ * @param char * in Input file
+ * @param char * outdir Output directory
+ * @param char * out_bmp Output path of bmp file
+ * @param int quality Quality of jpeg file
+ * @return int Success
+ */
+int
+code_jpeg (char* in, char* outdir, char* out_bmp, int quality);

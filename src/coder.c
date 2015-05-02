@@ -41,7 +41,7 @@ char path_jpegxr_dec[] = "./lib/jxr-1.1/JxrDecApp -i %s -o %s";
  * 2nd wildcard is output file (jpg)
  * 3rd wildcard is input file (bmp)
  */
-char path_jpeg_enc[] = "./lib/jpg-9a/cjpeg -quality %d -outfile %s %s  > /dev/null";
+char path_jpeg_enc[] = "./lib/jpg-9a/cjpeg -quality %d -optimize -outfile %s %s  > /dev/null";
 
 
 /**
@@ -356,11 +356,11 @@ encode_image(encodeFunction enc, decodeFunction dec, char* ext, char* in, char* 
   strcpy(out, out_bmp);
 
   // Delete jpeg
-  // unlink(out_jpeg);
+  unlink(out_jpeg);
 
   // printf("<img src='%s.png'><br/>%s (%d/%d)<br/>%f", out_jpeg, ext, size, des_size, quality);
   // printf("%s (%d/%d), %f\n", ext, size, des_size, quality);
-  //printf("%d,%d,%d,", size, des_size, quality);
+  printf("%d,%d,%d\n", des_size, size, quality);
   return 0;
 }
 
@@ -392,4 +392,34 @@ code_image (char* ext, char* in, char* outdir, char* out, double bpp)
     {
       return 1; // error
     }
+}
+
+/**
+ * Create a BMP with the quality of a JPEG image with specified quality setting.
+ * @param char * in Input file
+ * @param char * outdir Output directory
+ * @param char * out_bmp Output path of bmp file
+ * @param int quality Quality of jpeg file
+ * @return int Success
+ */
+int
+code_jpeg (char* in, char* outdir, char* out_bmp, int quality)
+{
+  char out_jpeg[1000];
+  char bpp_string[50];
+
+  // create jpeg file path
+  strcpy(out_jpeg, outdir);
+  strcat(out_jpeg, basename(in));
+  // remove .bmp
+  out_jpeg[(strlen(out_jpeg) - 4)] = '\0';
+  sprintf(bpp_string, "-%d", quality);
+  strcat(out_jpeg, bpp_string);
+  strcat(out_jpeg, ".jpg");
+  // derive bmp path from jpeg path
+  sprintf(out_bmp, "%s%s", out_jpeg, ".bmp");
+  jpeg_enc(in, out_jpeg, quality);
+  int success = jpeg_dec(out_jpeg, out_bmp);
+  //unlink(out_jpeg); // remove jpeg
+  return success;
 }
