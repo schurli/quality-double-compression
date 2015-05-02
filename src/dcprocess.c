@@ -14,9 +14,9 @@
 int compare (const FTSENT**, const FTSENT**);
 
 
-char leg[2047];
-char msssim[2047];
-char vif[2047];
+char leg[32767];
+char msssim[32767];
+char vif[32767];
 char sfloat[63];
 
 /**
